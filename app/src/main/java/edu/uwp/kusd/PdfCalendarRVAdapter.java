@@ -82,7 +82,7 @@ public class PdfCalendarRVAdapter extends RecyclerView.Adapter<PdfCalendarRVAdap
      * Binds the PdfCalendar data to a view.
      *
      * @param pdfCalendarViewHolder a PdfCalendarViewHolder
-     * @param position the postion to bind at
+     * @param position the position to bind at
      */
     @Override
     public void onBindViewHolder(final PdfCalendarViewHolder pdfCalendarViewHolder, final int position) {

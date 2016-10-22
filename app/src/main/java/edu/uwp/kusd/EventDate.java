@@ -1,9 +1,11 @@
 package edu.uwp.kusd;
 
+import java.io.Serializable;
+
 /**
  * A class to encapsulate event dates.
  */
-public class EventDate {
+public class EventDate implements Serializable {
 
     /**
      * The year an event is in.

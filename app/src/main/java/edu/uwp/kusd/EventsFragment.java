@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.android.volley.Cache;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -25,6 +27,8 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import edu.uwp.kusd.network.CacheStringRequest;
+import edu.uwp.kusd.network.InternalStorage;
 import edu.uwp.kusd.network.VolleySingleton;
 
 /**
@@ -36,6 +40,11 @@ public class EventsFragment extends Fragment {
      * A constant for the URL where the event XML is located.
      */
     private static final String EVENT_CALENDAR_URL = "http://www.kusd.edu/xml-calendar";
+
+    /**
+     *
+     */
+    private static final String PARSED_EVENTS = "parsed events";
 
     /**
      * A list of all events parsed from the XML.
@@ -58,6 +67,11 @@ public class EventsFragment extends Fragment {
     private HashMap<EventDate, List<Event>> mEventsByMonth;
 
     /**
+     *
+     */
+    RequestQueue requestQueue = VolleySingleton.getsInstance().getRequestQueue();
+
+    /**
      * Create the view for the fragment, request the XML data from KUSD, and parse the events.
      *
      * @param inflater layout inflater for the fragment
@@ -74,41 +88,64 @@ public class EventsFragment extends Fragment {
         //Request XML from KUSD
         //TODO: Handle request errors
         //TODO: Close the queue
-        RequestQueue requestQueue = VolleySingleton.getsInstance().getRequestQueue();
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, EVENT_CALENDAR_URL, new Response.Listener<String>() {
 
-            @Override
-            public void onResponse(String response) {
-                //Create a new XML parser
-                EventXmlParser calendarXmlParser = new EventXmlParser(response);
-                try {
-                    //Parse the events into a list
-                    mEventList = calendarXmlParser.parseNodes();
+        Cache.Entry temp = requestQueue.getCache().get(EVENT_CALENDAR_URL);
+        if (temp != null && (!temp.isExpired() && !temp.refreshNeeded())) {
+            try {
+                @SuppressWarnings("unchecked")
+                HashMap<EventDate, List<Event>> tempeventslist = (HashMap<EventDate, List<Event>>) InternalStorage.readObject(getContext(), PARSED_EVENTS);
+                recyclerView = (RecyclerView) rootView.findViewById(R.id.eventsRecyclerView);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                EventsRVAdapter adapter = new EventsRVAdapter(tempeventslist, getActivity(), filterDate);
+                recyclerView.setAdapter(adapter);
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        } else {
 
-                    //Instantiate the RecyclerView for the events list
-                    recyclerView = (RecyclerView) rootView.findViewById(R.id.eventsRecyclerView);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            StringRequest stringRequest = new CacheStringRequest(Request.Method.GET, EVENT_CALENDAR_URL, new Response.Listener<String>() {
 
-                    //Separate events by month-year
-                    mEventsByMonth = eventSeparator(mEventList);
+                @Override
+                public void onResponse(String response) {
+                    //Create a new XML parser
+                    EventXmlParser calendarXmlParser = new EventXmlParser(response);
+                    try {
+                        //Parse the events into a list
+                        mEventList = calendarXmlParser.parseNodes();
 
-                    //Pass the separated events HashMap into the RecyclerView with
-                    EventsRVAdapter adapter = new EventsRVAdapter(mEventsByMonth, getActivity(), filterDate);
-                    recyclerView.setAdapter(adapter);
-                } catch (XmlPullParserException|IOException|ParseException e) {
-                    e.printStackTrace();
+                        //Instantiate the RecyclerView for the events list
+                        recyclerView = (RecyclerView) rootView.findViewById(R.id.eventsRecyclerView);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+                        //Separate events by month-year
+                        mEventsByMonth = eventSeparator(mEventList);
+                        InternalStorage.writeObject(getContext(), PARSED_EVENTS, mEventsByMonth);
+
+                        //Pass the separated events HashMap into the RecyclerView with
+                        EventsRVAdapter adapter = new EventsRVAdapter(mEventsByMonth, getActivity(), filterDate);
+                        recyclerView.setAdapter(adapter);
+                    } catch (XmlPullParserException | IOException | ParseException e) {
+                        e.printStackTrace();
+                    }
+                    calendarXmlParser.closeXmlSteam();
                 }
-                calendarXmlParser.closeXmlSteam();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
-        requestQueue.add(stringRequest);
-
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    error.printStackTrace();
+                }
+            });
+            requestQueue.add(stringRequest);
+        }
         return rootView;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (requestQueue != null) {
+            requestQueue.cancelAll(EVENT_CALENDAR_URL);
+        }
     }
 
     /**
@@ -123,7 +160,7 @@ public class EventsFragment extends Fragment {
 
         //Generate the the entries in the HashMap
         for (Event event : allEvents) {
-            tempEventDate = new EventDate(event.getDate().getYear(),event.getDate().getMonth(), 0);
+            tempEventDate = new EventDate(event.getDate().getYear(), event.getDate().getMonth(), 0);
             if (!eventsByMonth.containsKey(tempEventDate)) {
                 eventsByMonth.put(tempEventDate, new ArrayList<Event>());
             }
@@ -131,7 +168,7 @@ public class EventsFragment extends Fragment {
 
         //Place events into the corresponding list for their month-year
         for (Event event : allEvents) {
-            tempEventDate = new EventDate(event.getDate().getYear(),event.getDate().getMonth(), 0);
+            tempEventDate = new EventDate(event.getDate().getYear(), event.getDate().getMonth(), 0);
             eventsByMonth.get(tempEventDate).add(event);
         }
         return eventsByMonth;
@@ -190,7 +227,6 @@ public class EventsFragment extends Fragment {
                     continue;
                 }
                 //Add parse data of events and add parsed events to the list to be returned
-                String name = parser.getName();
                 Event tempEvent = parseEvent();
                 events.add(tempEvent);
             }
@@ -210,6 +246,7 @@ public class EventsFragment extends Fragment {
             EventDate date = null;
             String school = null;
             String details = null;
+            String dateString = null;
 
             while (parser.next() != XmlPullParser.END_TAG) {
                 if (parser.getEventType() != XmlPullParser.START_TAG) {
@@ -219,22 +256,23 @@ public class EventsFragment extends Fragment {
                 //Parse the title if the current tag is title
                 if (name.equals("title")) {
                     title = readTitle();
-                //Parse the date if the current tag is date
+                    //Parse the date if the current tag is date
                 } else if (name.equals("date")) {
                     try {
                         date = readDate();
+                      //  dateString = readDateString();
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-                //Parse the school name if the current tag is school
+                    //Parse the school name if the current tag is school
                 } else if (name.equals("school")) {
                     school = readSchool();
-                //Parse the details of an event if the current tag is details
+                    //Parse the details of an event if the current tag is details
                 } else if (name.equals("details")) {
                     details = readDetails();
                 }
             }
-            return new Event(title, date, school, details);
+            return new Event(title, date, school, details, dateString);
         }
 
         /**
@@ -267,6 +305,13 @@ public class EventsFragment extends Fragment {
             parser.require(XmlPullParser.END_TAG, null, "date");
             return tempEventDate;
         }
+
+        /*private String readDateString() throws IOException, XmlPullParserException {
+            parser.require(XmlPullParser.START_TAG, null, "date");
+            String temp = readText();
+            parser.require(XmlPullParser.END_TAG, null, "date");
+            return temp;
+        }*/
 
         /**
          * Helper method to read the school name for an event.
@@ -331,8 +376,7 @@ public class EventsFragment extends Fragment {
          */
         private EventDate parseDate(String input) {
             String[] fields = input.split("-");
-            EventDate tempEventDate = new EventDate(Integer.parseInt(fields[0]), Integer.parseInt(fields[1]), Integer.parseInt(fields[2]));
-            return tempEventDate;
+            return new EventDate(Integer.parseInt(fields[0]), Integer.parseInt(fields[1]), Integer.parseInt(fields[2]));
         }
     }
 

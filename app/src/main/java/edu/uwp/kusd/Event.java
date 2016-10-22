@@ -2,12 +2,14 @@
 
 package edu.uwp.kusd;
 
+import java.io.Serializable;
+
 /**
  * A class to encapsulate event data.
  * Relevant fields are the title, date, school(s) involved on the event, and any details listed.
  */
 
-class Event  implements Comparable<Event> {
+class Event implements Comparable<Event>, Serializable {
 
     /**
      * The title of an event.
@@ -30,6 +32,11 @@ class Event  implements Comparable<Event> {
     private String mDetails;
 
     /**
+     * String representation of the full date including time.
+     */
+    private String mFullDateInfo;
+
+    /**
      * Constructs a new event.
      *
      * @param eventTitle the title of an event
@@ -37,11 +44,12 @@ class Event  implements Comparable<Event> {
      * @param school the school or schools involed in an event
      * @param details the details of an event
      */
-    Event(String eventTitle, EventDate date, String school, String details) {
+    Event(String eventTitle, EventDate date, String school, String details, String fullDateInfo) {
         this.mEventTitle = eventTitle;
         this.mDate = date;
         this.mSchool = school;
         this.mDetails = details;
+        this.mFullDateInfo = fullDateInfo;
     }
 
     /**
