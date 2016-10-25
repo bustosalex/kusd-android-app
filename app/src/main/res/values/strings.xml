@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">KUSD</string>
+    <string name="board_member_activity_title">Board Members</string>
+    <string name="term_expires">Term Expires: </string>
 </resources>

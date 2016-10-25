@@ -1,6 +1,8 @@
 package edu.uwp.kusd;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.support.annotation.StringRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 
 import java.text.SimpleDateFormat;
@@ -47,7 +50,8 @@ public class BoardMemberRVAdapter extends RecyclerView.Adapter<BoardMemberRVAdap
         holder.mPositionTextView.setText(mBoardMembers.get(position).getPosition());
         holder.mEmailTextView.setText(mBoardMembers.get(position).getEmail());
         holder.mPhoneTextView.setText(mBoardMembers.get(position).getPhone());
-        holder.mTermTextView.setText(dateFormat.format(mBoardMembers.get(position).getTerm()));
+        String temp = mContext.getResources().getString(R.string.term_expires) + " " + dateFormat.format(mBoardMembers.get(position).getTerm());
+        holder.mTermTextView.setText(temp);
     }
 
     @Override
@@ -58,7 +62,7 @@ public class BoardMemberRVAdapter extends RecyclerView.Adapter<BoardMemberRVAdap
     public class BoardMemberViewHolder extends RecyclerView.ViewHolder {
 
         private NetworkImageView mNetworkImageView;
-        private ImageView mPhotoImageView;
+        //private ImageView mPhotoImageView;
         private TextView mNameTextView;
         private TextView mPositionTextView;
         private TextView mEmailTextView;

@@ -97,7 +97,6 @@
                         android:id="@+id/board_phone"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="262-555-5555"
                         android:textSize="16sp"
                         android:layout_marginTop="8dp"/>
 
@@ -120,7 +119,7 @@
                         android:id="@+id/board_term"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="Term Expires: April 2017"
+                        android:text="Term Expires: "
                         android:textSize="16sp"
                         android:layout_marginTop="8dp"/>
 
