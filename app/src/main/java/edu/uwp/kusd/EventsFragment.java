@@ -108,7 +108,9 @@ public class EventsFragment extends Fragment {
                 @Override
                 public void onResponse(String response) {
                     //Create a new XML parser
+                    //response = response.replaceAll("<p>", "").replaceAll("</p>", "").replaceAll("<br/>", "").replaceAll("<br />", "");
                     EventXmlParser calendarXmlParser = new EventXmlParser(response);
+
                     try {
                         //Parse the events into a list
                         mEventList = calendarXmlParser.parseNodes();
@@ -270,6 +272,12 @@ public class EventsFragment extends Fragment {
                     //Parse the details of an event if the current tag is details
                 } else if (name.equals("details")) {
                     details = readDetails();
+                } else if (name.equals("p")) {
+                    skip();
+                } else if (name.equals("br")) {
+                    skip();
+                } else if (name.equals("a")) {
+                    skip();
                 }
             }
             return new Event(title, date, school, details, dateString);
@@ -378,9 +386,22 @@ public class EventsFragment extends Fragment {
             String[] fields = input.split("-");
             return new EventDate(Integer.parseInt(fields[0]), Integer.parseInt(fields[1]), Integer.parseInt(fields[2]));
         }
+
+        private void skip() throws XmlPullParserException, IOException {
+            if (parser.getEventType() != XmlPullParser.START_TAG) {
+                throw new IllegalStateException();
+            }
+            int depth = 1;
+            while (depth != 0) {
+                switch (parser.next()) {
+                    case XmlPullParser.END_TAG:
+                        depth--;
+                        break;
+                    case XmlPullParser.START_TAG:
+                        depth++;
+                        break;
+                }
+            }
+        }
     }
-
-
-
-
 }
