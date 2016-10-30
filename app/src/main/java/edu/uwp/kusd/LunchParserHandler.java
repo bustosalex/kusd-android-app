@@ -43,7 +43,7 @@ public class LunchParserHandler {
                 String tagname = parser.getName();
                 switch (eventType) {
                     case XmlPullParser.START_TAG:
-                        if (tagname.equalsIgnoreCase("title")) {
+                        if (tagname.equalsIgnoreCase("node")) {
                             // create a new instance of LunchObj
                            lunchObj = new LunchObj();
 
@@ -55,7 +55,7 @@ public class LunchParserHandler {
                         break;
 
                     case XmlPullParser.END_TAG:
-                        if (tagname.equalsIgnoreCase("title")) {
+                        if (tagname.equalsIgnoreCase("node")) {
                             // add new school to list
                             schoolLunches.add(lunchObj);
                         } else if (tagname.equalsIgnoreCase("title")) {
