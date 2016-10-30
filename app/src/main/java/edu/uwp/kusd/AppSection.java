@@ -4,10 +4,12 @@ public class AppSection {
 
     private int icon;
     private Class className;
+    private String sectionName;
 
-    AppSection(int icon, Class className) {
+    AppSection(int icon, Class className, String sectionName) {
         this.icon = icon;
         this.className = className;
+        this.sectionName = sectionName;
     }
 
     public int getIcon() {
@@ -16,5 +18,9 @@ public class AppSection {
 
     public Class getActivityName() {
         return className;
+    }
+
+    public String getSectionName() {
+        return sectionName;
     }
 }
