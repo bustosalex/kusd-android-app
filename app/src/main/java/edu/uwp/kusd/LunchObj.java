@@ -33,4 +33,11 @@ public class LunchObj {
         this.category = category;
     }
 
-}
+    public  void cloneLunch(LunchObj object){
+        this.category = object.getCategory();
+        this.title = object.getTitle();
+        this.fileUrl = object.getfileURL();
+        }
+    }
+
+
