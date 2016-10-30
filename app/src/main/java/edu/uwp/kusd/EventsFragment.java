@@ -108,7 +108,8 @@ public class EventsFragment extends Fragment {
                 @Override
                 public void onResponse(String response) {
                     //Create a new XML parser
-                    //response = response.replaceAll("<p>", "").replaceAll("</p>", "").replaceAll("<br/>", "").replaceAll("<br />", "");
+                    String urlRegex = "<a href=\"https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&/=]*)\">";
+                    response = response.replaceAll("<p>", "").replaceAll("</p>", "").replaceAll("<br/>", "").replaceAll("<br />", "").replaceAll("</a>", "").replaceAll(urlRegex, "").replaceAll("<ul>", "").replaceAll("<li>", "").replaceAll("</li>", "").replaceAll("</ul>", "").replaceAll("<strong>", "").replaceAll("</strong>", "");
                     EventXmlParser calendarXmlParser = new EventXmlParser(response);
 
                     try {
@@ -276,7 +277,7 @@ public class EventsFragment extends Fragment {
                     skip();
                 } else if (name.equals("br")) {
                     skip();
-                } else if (name.equals("a")) {
+                } else if (name.equals("ul")) {
                     skip();
                 }
             }

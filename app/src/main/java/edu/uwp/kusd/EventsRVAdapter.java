@@ -102,7 +102,7 @@ public class EventsRVAdapter extends RecyclerView.Adapter<EventsRVAdapter.EventV
         //Sort the events by date
         Collections.sort(mEventListByDate.get(mMonthYear));
         eventViewHolder.eventNameTextView.setText(mEventListByDate.get(mMonthYear).get(position).getEventTitle().replace("&#039;", "'"));
-        eventViewHolder.schoolTextView.setText(mEventListByDate.get(mMonthYear).get(position).getSchool());
+        //eventViewHolder.schoolTextView.setText(mEventListByDate.get(mMonthYear).get(position).getSchool());
         eventViewHolder.dayTextView.setText(Integer.toString(mEventListByDate.get(mMonthYear).get(position).getDate().getDay()));
         eventViewHolder.monthNameTextView.setText(new DateFormatSymbols().getMonths()[mEventListByDate.get(mMonthYear).get(position).getDate().getMonth() - 1].toUpperCase());
     }
