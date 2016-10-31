@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import edu.uwp.kusd.News.NewsActivity;
+
 public class HomeActivity extends AppCompatActivity {
 
     private ImageButton mNewsButton;
