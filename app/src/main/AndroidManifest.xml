@@ -21,7 +21,8 @@
         <activity android:name=".NewsActivity" />
         <activity android:name=".CalendarActivity"
             android:parentActivityName=".HomeActivity"
-            android:theme="@style/AppThemeNoActionBar"/>
+            android:theme="@style/AppThemeNoActionBar"
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".LunchActivity" />
         <activity android:name=".SchoolsActivity" />
