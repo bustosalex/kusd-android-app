@@ -25,6 +25,7 @@
         <activity android:name=".TextAlertActivity" />
         <activity android:name=".BoardMembersActivity"
                   android:parentActivityName=".HomeActivity"
+                  android:screenOrientation="portrait"
                   android:theme="@style/AppThemeNoActionBar"/>
         <activity android:name=".InfiniteCampusActivity"/>
     </application>
