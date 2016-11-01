@@ -1,13 +1,15 @@
-package edu.uwp.kusd;
+package edu.uwp.kusd.News;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class NewsActivity extends AppCompatActivity {
+import edu.uwp.kusd.R;
+
+public class NewsDetails extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_news);
+        setContentView(R.layout.news_details_layout);
     }
 }
