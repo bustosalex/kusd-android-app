@@ -29,7 +29,9 @@
             android:theme="@style/AppThemeNoActionBar"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".LunchActivity" />
+        <activity android:name=".LunchActivity"
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppThemeNoActionBar"/>
         <activity android:name=".SchoolsActivity" />
         <activity android:name=".SocialMediaActivity" />
         <activity android:name=".FeaturesActivity" />

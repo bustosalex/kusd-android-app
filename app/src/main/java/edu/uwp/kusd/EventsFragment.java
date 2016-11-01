@@ -59,7 +59,7 @@ public class EventsFragment extends Fragment {
     /**
      * An EventDate to use as a filter to show only the events in a desired month year
      */
-    private EventDate filterDate = new EventDate(2016, 10, 0);
+    private EventDate filterDate = new EventDate(2016, 11, 0);
 
     /**
      * A HashMap with EventDates and keys and lists of events as values.

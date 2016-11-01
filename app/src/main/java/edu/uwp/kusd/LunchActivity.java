@@ -26,8 +26,9 @@ public class LunchActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Lunch Menus");
 
-        actionBar.setDisplayHomeAsUpEnabled(true);
+         actionBar.setDisplayHomeAsUpEnabled(true);
 
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
