@@ -24,7 +24,6 @@
             android:parentActivityName=".HomeActivity"
             android:theme="@style/AppThemeNoActionBar"
             android:screenOrientation="portrait"/>
-
         <activity android:name=".LunchActivity" />
         <activity android:name=".SchoolsActivity" />
         <activity android:name=".SocialMediaActivity" />
