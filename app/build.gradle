@@ -34,4 +34,5 @@ dependencies {
     compile 'com.github.traex.expandablelayout:library:1.3'
     testCompile 'junit:junit:4.12'
     compile project (':volley')
+    compile 'com.android.support:recyclerview-v7:24.2.1'
 }
