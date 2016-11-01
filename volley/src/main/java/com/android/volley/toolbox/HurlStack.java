@@ -60,6 +60,7 @@ public class HurlStack implements HttpStack {
          * this URL should not be used at all.
          */
         public String rewriteUrl(String originalUrl);
+
     }
 
     private final UrlRewriter mUrlRewriter;

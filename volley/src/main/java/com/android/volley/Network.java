@@ -27,4 +27,5 @@ public interface Network {
      * @throws VolleyError on errors
      */
     public NetworkResponse performRequest(Request<?> request) throws VolleyError;
+
 }

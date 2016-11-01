@@ -43,6 +43,7 @@ public class RequestQueue {
     public static interface RequestFinishedListener<T> {
         /** Called when a request has finished processing. */
         public void onRequestFinished(Request<T> request);
+
     }
 
     /** Used for generating monotonically-increasing sequence numbers for requests. */
@@ -187,6 +188,7 @@ public class RequestQueue {
      */
     public interface RequestFilter {
         public boolean apply(Request<?> request);
+
     }
 
     /**

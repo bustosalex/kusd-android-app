@@ -30,6 +30,7 @@ public interface Cache {
      */
     public Entry get(String key);
 
+
     /**
      * Adds or replaces an entry to the cache.
      * @param key Cache key
@@ -37,11 +38,13 @@ public interface Cache {
      */
     public void put(String key, Entry entry);
 
+
     /**
      * Performs any potentially long-running actions needed to initialize the cache;
      * will be called from a worker thread.
      */
     public void initialize();
+
 
     /**
      * Invalidates an entry in the cache.
@@ -50,21 +53,26 @@ public interface Cache {
      */
     public void invalidate(String key, boolean fullExpire);
 
+
     /**
      * Removes an entry from the cache.
      * @param key Cache key
      */
+ 
     public void remove(String key);
+
 
     /**
      * Empties the cache.
      */
     public void clear();
 
+
     /**
      * Data and metadata for an entry returned by the cache.
      */
     public static class Entry {
+
         /** The data returned from cache. */
         public byte[] data;
 

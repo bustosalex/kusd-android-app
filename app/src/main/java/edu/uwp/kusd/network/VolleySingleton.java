@@ -35,6 +35,7 @@ public class VolleySingleton {
                 mCache.put(url, bitmap);
             }
         });
+
     }
 
     public static VolleySingleton getsInstance() {
@@ -52,3 +53,4 @@ public class VolleySingleton {
         return mImageLoader;
     }
 }
+

@@ -26,10 +26,12 @@ public interface RetryPolicy {
      */
     public int getCurrentTimeout();
 
+
     /**
      * Returns the current retry count (used for logging).
      */
     public int getCurrentRetryCount();
+
 
     /**
      * Prepares for the next retry by applying a backoff to the timeout.
@@ -38,4 +40,5 @@ public interface RetryPolicy {
      * ran out of attempts), the passed in error is thrown.
      */
     public void retry(VolleyError error) throws VolleyError;
+
 }

@@ -2,4 +2,36 @@
     <string name="app_name">KUSD</string>
     <string name="board_member_activity_title">Board Members</string>
     <string name="term_expires">Term Expires: </string>
+    <string name="calendar_activity_title">School Calendars</string>
+    <string name="calendar_activity_events_title">Events</string>
+    <string name="calendar_activity_pdf_calendars">PDF Calendars</string>
+
+    <string-array name="fileTitles">
+        <item>Placeholder PDF</item>
+        <item>Placeholder PDF</item>
+        <item>Placeholder PDF</item>
+        <item>Placeholder PDF</item>
+        <item>Placeholder PDF</item>
+        <item>Placeholder PDF</item>
+        <item>Placeholder PDF</item>
+        <item>Placeholder PDF</item>
+        <item>Placeholder PDF</item>
+        <item>Placeholder PDF</item>
+    </string-array>
+
+    <string-array name="fileDescriptions">
+        <item>This is a PDF Calendar description.</item>
+        <item>This is a PDF Calendar description.</item>
+        <item>This is a PDF Calendar description.</item>
+        <item>This is a PDF Calendar description.</item>
+        <item>This is a PDF Calendar description.</item>
+        <item>This is a PDF Calendar description.</item>
+        <item>This is a PDF Calendar description.</item>
+        <item>This is a PDF Calendar description.</item>
+        <item>This is a PDF Calendar description.</item>
+        <item>This is a PDF Calendar description.</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
