@@ -42,7 +42,7 @@ public class LunchActivity extends AppCompatActivity {
         LunchActivity_ViewPageAdapter adapter = new  LunchActivity_ViewPageAdapter(getSupportFragmentManager());
         adapter.addFragment(new LunchActivity_Tab_One(), "Elementary School");
         adapter.addFragment(new LunchActivity_Tab_Two(), "Middle School");
-        //adapter.addFragment(new TabThreeFragment(), "Three");
+        adapter.addFragment(new LunchActivity_Tab_Three(), "High School");
         viewPager.setAdapter(adapter);
 
     }
