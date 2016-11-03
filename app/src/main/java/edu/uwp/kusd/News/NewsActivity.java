@@ -7,17 +7,29 @@ import java.util.List;
 import java.io.IOException;
 import java.io.InputStream;
 import android.app.Activity;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import edu.uwp.kusd.R;
 
-public class NewsActivity extends Activity {
+public class NewsActivity extends AppCompatActivity {
+
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.news_test);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("News");
+
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         ListView listView = (ListView) findViewById(R.id.listView1);
 

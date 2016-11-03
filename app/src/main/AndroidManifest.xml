@@ -23,7 +23,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".News.NewsActivity" />
+        <activity android:name=".News.NewsActivity"
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppThemeNoActionBar"/>
         <activity android:name=".CalendarActivity"
             android:parentActivityName=".HomeActivity"
             android:theme="@style/AppThemeNoActionBar"

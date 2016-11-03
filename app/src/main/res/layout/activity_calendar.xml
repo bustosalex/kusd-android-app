@@ -33,6 +33,5 @@
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:layout_below="@id/tab_layout"/>
->>>>>>> 7d6ddb5f1183b4bcf6823e7b538a2925562c35a5
 
 </RelativeLayout>
