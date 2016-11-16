@@ -17,8 +17,8 @@ import static android.content.pm.PackageManager.NameNotFoundException;
 public class InfiniteCampusActivity extends AppCompatActivity {
 
 
-    private final String campusExt = "com.infinitecampus";
-    private final String campusExtExt = ".mobilePortal&hl=en";
+    private final String campusExt = "com.infinitecampus.mobilePortal";
+    private final String campusExtExt = "&hl=en";
     private final String campusURL = "market://details?id=" + campusExt + campusExtExt;
 
 
@@ -27,7 +27,7 @@ public class InfiniteCampusActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_infinite_campus);
 
-        Intent launchIntent = getPackageManager().getLaunchIntentForPackage(campusExt+campusExtExt);
+        Intent launchIntent = getPackageManager().getLaunchIntentForPackage(campusExt);
         if (launchIntent != null) {
             startActivity(launchIntent);//null pointer check in case package name was not found
 
