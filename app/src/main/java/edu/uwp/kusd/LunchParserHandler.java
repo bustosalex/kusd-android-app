@@ -19,6 +19,7 @@ public class LunchParserHandler {
     private LunchObj lunchObj;
     private String text;
 
+
     public LunchParserHandler(){
         schoolLunches = new ArrayList<LunchObj>();
     }
