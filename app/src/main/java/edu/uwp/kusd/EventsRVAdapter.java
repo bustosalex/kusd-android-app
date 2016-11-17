@@ -21,7 +21,7 @@ public class EventsRVAdapter extends RecyclerView.Adapter<EventsRVAdapter.EventV
     /**
      * Hashmap of events listed by month-year.
      */
-    private HashMap<EventDate, List<Event>> mEventListByDate;
+    private HashMap<String, List<Event>> mEventListByDate;
 
     /**
      * The context.
@@ -31,7 +31,7 @@ public class EventsRVAdapter extends RecyclerView.Adapter<EventsRVAdapter.EventV
     /**
      * An EventDate to choose what month-year to show events for.
      */
-    private EventDate mMonthYear;
+    private String mMonthYear;
 
     /**
      * Constructs and adapter for the Event RecyclerView.
@@ -40,7 +40,7 @@ public class EventsRVAdapter extends RecyclerView.Adapter<EventsRVAdapter.EventV
      * @param context the context
      * @param monthYear a EventDate to choose what month-year to show events for
      */
-    public EventsRVAdapter(HashMap<EventDate, List<Event>> eventListByDate, Context context, EventDate monthYear) {
+    public EventsRVAdapter(HashMap<String, List<Event>> eventListByDate, Context context, String monthYear) {
         this.mEventListByDate = eventListByDate;
         this.context = context;
         this.mMonthYear = monthYear;
@@ -62,11 +62,6 @@ public class EventsRVAdapter extends RecyclerView.Adapter<EventsRVAdapter.EventV
         private TextView eventNameTextView;
 
         /**
-         * TextView for the school name(s) for an event.
-         */
-        private TextView schoolTextView;
-
-        /**
          * TextView for the day of an event.
          */
         private TextView dayTextView;
@@ -85,7 +80,6 @@ public class EventsRVAdapter extends RecyclerView.Adapter<EventsRVAdapter.EventV
             super(eventView);
             cardView = (CardView) eventView.findViewById(R.id.cardView);
             eventNameTextView = (TextView) eventView.findViewById(R.id.event_name_text_view);
-            schoolTextView = (TextView) eventView.findViewById(R.id.school_text_view);
             dayTextView = (TextView) eventView.findViewById(R.id.day_text_view);
             monthNameTextView = (TextView) eventView.findViewById(R.id.month_name_text_view);
         }
@@ -103,8 +97,8 @@ public class EventsRVAdapter extends RecyclerView.Adapter<EventsRVAdapter.EventV
         Collections.sort(mEventListByDate.get(mMonthYear));
         eventViewHolder.eventNameTextView.setText(mEventListByDate.get(mMonthYear).get(position).getEventTitle().replace("&#039;", "'"));
         //eventViewHolder.schoolTextView.setText(mEventListByDate.get(mMonthYear).get(position).getSchool());
-        eventViewHolder.dayTextView.setText(Integer.toString(mEventListByDate.get(mMonthYear).get(position).getDate().getDay()));
-        eventViewHolder.monthNameTextView.setText(new DateFormatSymbols().getMonths()[mEventListByDate.get(mMonthYear).get(position).getDate().getMonth() - 1].toUpperCase());
+        eventViewHolder.dayTextView.setText(Integer.toString(mEventListByDate.get(mMonthYear).get(position).getDayFromDate()));
+        eventViewHolder.monthNameTextView.setText(new DateFormatSymbols().getMonths()[mEventListByDate.get(mMonthYear).get(position).getMonthFromDate() - 1].toUpperCase());
     }
 
     /**

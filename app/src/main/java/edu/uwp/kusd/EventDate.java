@@ -2,10 +2,12 @@ package edu.uwp.kusd;
 
 import java.io.Serializable;
 
+import io.realm.RealmObject;
+
 /**
  * A class to encapsulate event dates.
  */
-public class EventDate implements Serializable {
+public class EventDate extends RealmObject implements Serializable {
 
     /**
      * The year an event is in.
@@ -21,6 +23,10 @@ public class EventDate implements Serializable {
      * The day of an event.
      */
     private int mDay;
+
+    public EventDate() {
+
+    }
 
     /**
      * Constructs an EventDate object with year, month, and day parameters.

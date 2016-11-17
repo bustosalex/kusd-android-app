@@ -1,7 +1,10 @@
 package edu.uwp.kusd;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
+
+import static edu.uwp.kusd.R.drawable.star;
 
 public class HomeActivityRVAdapter extends RecyclerView.Adapter<HomeActivityRVAdapter.HomeActivityViewHolder> {
 
@@ -51,8 +56,24 @@ public class HomeActivityRVAdapter extends RecyclerView.Adapter<HomeActivityRVAd
         holder.mIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(context, mAppSectionList.get(holder.getAdapterPosition()).getActivityName());
-                context.startActivity(i);
+                if (mAppSectionList.get(holder.getAdapterPosition()).getSectionName().equals("Infinite Campus")) {
+                    boolean installed = isAppInstalled("com.infinitecampus.mobilePortal");
+                    if (installed) {
+                        Intent intent = context.getPackageManager().getLaunchIntentForPackage("com.infinitecampus.mobilePortal");
+                        context.startActivity(intent);
+                    } else {
+                        try {
+                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.infinitecampus.mobilePortal" ));
+                            context.startActivity(intent);
+                        } catch (ActivityNotFoundException e) {
+                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.infinitecampus.mobilePortal&hl=en"));
+                            context.startActivity(intent);
+                        }
+                    }
+                } else {
+                    Intent i = new Intent(context, mAppSectionList.get(holder.getAdapterPosition()).getActivityName());
+                    context.startActivity(i);
+                }
             }
         });
     }
@@ -60,5 +81,18 @@ public class HomeActivityRVAdapter extends RecyclerView.Adapter<HomeActivityRVAd
     @Override
     public int getItemCount() {
         return mAppSectionList.size();
+    }
+
+    private boolean isAppInstalled(String uri) {
+        PackageManager pm = context.getPackageManager();
+        boolean app_installed;
+        try {
+            pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES);
+            app_installed = true;
+        }
+        catch (PackageManager.NameNotFoundException e) {
+            app_installed = false;
+        }
+        return app_installed;
     }
 }

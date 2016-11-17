@@ -1,9 +1,11 @@
 package edu.uwp.kusd;
 
+import io.realm.RealmObject;
+
 /**
  * Class to contain the data for PdfCalendars.
  */
-class PdfCalendar {
+public class PdfCalendar extends RealmObject {
 
     /**
      * Title for a Pdf file.
@@ -13,50 +15,35 @@ class PdfCalendar {
     /**
      * Name for a Pdf file - including file extension.
      */
-    private String mFileName;
+    private String mFileURL;
 
-    /**
-     * Description of a Pdf file.
-     */
-    private String mFileDescription;
+    public PdfCalendar() {
+    }
 
     /**
      * Constructs a PdfCalendar object with a file title, file name, and file description.
      *
      * @param fileTitle the title of a pdf
-     * @param fileDescription the description of a pdf
-     * @param fileName the file name of a pdf
+     * @param fileURL the Url of a pdf
      */
-    public PdfCalendar(String fileTitle, String fileDescription, String fileName) {
+    public PdfCalendar(String fileTitle, String fileURL) {
         this.mFileTitle = fileTitle;
-        this.mFileDescription = fileDescription;
-        this.mFileName = fileName + ".pdf";
+        this.mFileURL = fileURL;
     }
 
-    /**
-     * Gets the file title for a PdfCalendar.
-     *
-     * @return
-     */
     public String getFileTitle() {
-        return  mFileTitle;
+        return mFileTitle;
     }
 
-    /**
-     * Gets the file description for a PdfCalendar.
-     *
-     * @return
-     */
-    public String getFileDescription() {
-        return mFileDescription;
+    public void setFileTitle(String fileTitle) {
+        mFileTitle = fileTitle;
     }
 
-    /**
-     * Gets the file name for a PdfCalendar.
-     *
-     * @return
-     */
-    public String getFileName() {
-        return mFileName;
+    public String getFileURL() {
+        return mFileURL;
+    }
+
+    public void setFileURL(String fileURL) {
+        mFileURL = fileURL;
     }
 }

@@ -4,12 +4,20 @@ package edu.uwp.kusd;
 
 import java.io.Serializable;
 
+import io.realm.RealmObject;
+
 /**
  * A class to encapsulate event data.
  * Relevant fields are the title, date, school(s) involved on the event, and any details listed.
  */
 
-class Event implements Comparable<Event>, Serializable {
+public class Event extends RealmObject implements Comparable<Event>, Serializable {
+
+    /**
+     * Id of an event/
+     */
+
+    private String mId;
 
     /**
      * The title of an event.
@@ -19,7 +27,14 @@ class Event implements Comparable<Event>, Serializable {
     /**
      * The date or dates of an event.
      */
-    private EventDate mDate;
+    //private EventDate mDate;
+    private String mDate;
+
+    private String mYear;
+
+    private String mMonth;
+
+    private String mDay;
 
     /**
      * The school or or schools involved in the event.
@@ -36,6 +51,13 @@ class Event implements Comparable<Event>, Serializable {
      */
     private String mFullDateInfo;
 
+    private String mPDF;
+
+    public Event() {
+
+    }
+
+
     /**
      * Constructs a new event.
      *
@@ -44,12 +66,18 @@ class Event implements Comparable<Event>, Serializable {
      * @param school the school or schools involed in an event
      * @param details the details of an event
      */
-    Event(String eventTitle, EventDate date, String school, String details, String fullDateInfo) {
+    public Event(String id, String eventTitle, String date, String school, String details, String fullDateInfo, String pdf) {
+        this.mId = id;
         this.mEventTitle = eventTitle;
         this.mDate = date;
         this.mSchool = school;
         this.mDetails = details;
         this.mFullDateInfo = fullDateInfo;
+        this.mPDF = pdf;
+    }
+
+    public String getId() {
+        return mId;
     }
 
     /**
@@ -66,7 +94,7 @@ class Event implements Comparable<Event>, Serializable {
      *
      * @return the date of an event.
      */
-    EventDate getDate() {
+    String getDate() {
         return mDate;
     }
 
@@ -96,7 +124,78 @@ class Event implements Comparable<Event>, Serializable {
      */
     @Override
     public int compareTo(Event o) {
-        return this.getDate().getDay() - o.getDate().getDay();
+        return this.getDayFromDate() - o.getDayFromDate();
+    }
+
+    public int getYearFromDate() {
+        String[] fields = this.mDate.split("-");
+        return Integer.parseInt(fields[0]);
+    }
+
+    public int getMonthFromDate() {
+        String[] fields = this.mDate.split("-");
+        return Integer.parseInt(fields[1]);
+    }
+
+    public int getDayFromDate() {
+        String[] fields = this.mDate.split("-");
+        return Integer.parseInt(fields[2]);
+    }
+
+    public void setId(String id) {
+        mId = id;
+    }
+
+    public void setEventTitle(String eventTitle) {
+        mEventTitle = eventTitle;
+    }
+
+    public void setDate(String date) {
+        mDate = date;
+    }
+
+    public void setSchool(String school) {
+        mSchool = school;
+    }
+
+    public void setDetails(String details) {
+        mDetails = details;
+    }
+
+    public void setFullDateInfo(String fullDateInfo) {
+        mFullDateInfo = fullDateInfo;
+    }
+
+    public String getYear() {
+        return mYear;
+    }
+
+    public void setYear(String year) {
+        mYear = year;
+    }
+
+    public String getMonth() {
+        return mMonth;
+    }
+
+    public void setMonth(String month) {
+        mMonth = month;
+    }
+
+    public String getDay() {
+        return mDay;
+    }
+
+    public void setDay(String day) {
+        mDay = day;
+    }
+
+    public String getPDF() {
+        return mPDF;
+    }
+
+    public void setPDF(String PDF) {
+        mPDF = PDF;
     }
 }
 

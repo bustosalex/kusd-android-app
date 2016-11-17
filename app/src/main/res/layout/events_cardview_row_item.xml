@@ -50,6 +50,15 @@
 
             </RelativeLayout>
 
+            <ImageButton
+                android:id="@+id/pdf_arrow"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/pdf_arrow"
+                android:layout_centerVertical="true"
+                android:visibility="gone"/>
+
             <TextView
                 android:id="@+id/event_name_text_view"
                 android:layout_width="wrap_content"
@@ -57,14 +66,10 @@
                 android:layout_alignParentTop="true"
                 android:layout_toEndOf="@id/month_day_layout"
                 android:textSize="16sp"
-                tools:text="Event Name"/>
+                tools:text="Event Name"
+                android:layout_toStartOf="@id/pdf_arrow"/>
 
-            <TextView
-                android:id="@+id/school_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/event_name_text_view"
-                android:layout_toEndOf="@id/month_day_layout" />
+
 
         </RelativeLayout>
 
