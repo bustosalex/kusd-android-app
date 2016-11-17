@@ -64,7 +64,7 @@ public class LunchActivity_Tab_Three extends Fragment {
                 String temp = response;
 
 
-                Log.d("response", temp);
+                //Log.d("response", temp);
 
                 InputStream stream = new ByteArrayInputStream(response.getBytes(StandardCharsets.UTF_8));
                 LunchParserHandler parserHandler = new LunchParserHandler();

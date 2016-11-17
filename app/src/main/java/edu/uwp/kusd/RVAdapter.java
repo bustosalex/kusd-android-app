@@ -30,7 +30,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
         this.mItems = mItems;
         this.mContext = context;
     }
-
+    //Magic happens
     public class ItemViewHolder extends RecyclerView.ViewHolder {
 
         private TextView mTextView;
@@ -45,7 +45,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
     }
 
 
-
+    //Creates the info to be displayed and the onclick listener as well.
     @Override
     public void onBindViewHolder(final ItemViewHolder itemViewHolder, int i) {
         itemViewHolder.mTextView.setText(mItems.get(i).getTitle());

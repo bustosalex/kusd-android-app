@@ -43,7 +43,7 @@ public class LunchActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
     }
-
+    //Sets the name of the Fragment and which tab it will be working off of.
     private void setupViewPager(ViewPager viewPager) {
         LunchActivity_ViewPageAdapter adapter = new  LunchActivity_ViewPageAdapter(getSupportFragmentManager());
         adapter.addFragment(new LunchActivity_Tab_One(), "Elementary School");

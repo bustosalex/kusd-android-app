@@ -42,11 +42,14 @@ public class LunchActivity_Tab_One extends Fragment {
 
 
     RequestQueue queue = VolleySingleton.getsInstance().getRequestQueue();
+    //List of all lunch objects
     List<LunchObj> schoolLunches;
     private LunchObj lunchObj;
     private String text;
+    // Location of the xml file to be parsed
     private String url = "http://www.kusd.edu/xml-menus";
     ArrayList<LunchObj> items = null;
+    //List of lunch Objects that fit the proper category
     ArrayList<LunchObj> selectedItems = new ArrayList<LunchObj>();
 
 
@@ -66,15 +69,18 @@ public class LunchActivity_Tab_One extends Fragment {
         recyclerview = (RecyclerView) view.findViewById(R.id.recyclerview);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerview.setLayoutManager(layoutManager);
+
+        //Network Request
         CacheStringRequest stringRequest = new CacheStringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
+            //What to do with the request
             public void onResponse(String response) {
 
                 //schoolLunches = parse(response);
                 String temp = response;
                //temp =  temp.substring(40);
-
-                Log.d("response",temp);
+                //Tests waht is coming in
+                //Log.d("response",temp);
 
                 InputStream stream = new ByteArrayInputStream(response.getBytes(StandardCharsets.UTF_8));
                 LunchParserHandler parserHandler = new LunchParserHandler();
@@ -82,7 +88,7 @@ public class LunchActivity_Tab_One extends Fragment {
 
 
                 items = (ArrayList<LunchObj>) schoolLunches;
-
+                //Creates selected items to make.
                 for (int i = 0; i < items.size(); i++) {
                     LunchObj tempObj = new LunchObj();
                     if (items.get(i).getCategory().equals("Elementary School Menus")) {
