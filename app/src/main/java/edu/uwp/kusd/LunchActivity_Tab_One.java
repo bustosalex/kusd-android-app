@@ -6,6 +6,7 @@ package edu.uwp.kusd;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -110,6 +111,10 @@ public class LunchActivity_Tab_One extends Fragment {
 
         return view;
     }
+
+
+
+
 
 
 
