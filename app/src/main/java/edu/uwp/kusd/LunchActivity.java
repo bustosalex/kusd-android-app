@@ -10,11 +10,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.design.widget.TabLayout;
 
+import edu.uwp.kusd.network.VolleyApplication;
 
 
 public class LunchActivity extends AppCompatActivity {
 
-    Context context = getApplicationContext();
+    Context context = VolleyApplication.getAppContext();
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;

@@ -86,7 +86,7 @@ public class LunchActivity_Tab_Two extends Fragment {
                     }
                 }
 
-                RVAdapter adapter = new RVAdapter(selectedItems);
+                RVAdapter adapter = new RVAdapter(getContext(), selectedItems);
                 recyclerview.setAdapter(adapter);
 
 

@@ -7,6 +7,7 @@ package edu.uwp.kusd;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.Layout;
 import android.view.LayoutInflater;
@@ -23,32 +24,23 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
     private List<LunchObj> mItems;
     String pdf = "";
     int temp = 0;
+    private Context mContext;
 
-    public RVAdapter(List<LunchObj> mItems) {
+    public RVAdapter(Context context, List<LunchObj> mItems) {
         this.mItems = mItems;
+        this.mContext = context;
     }
 
     public class ItemViewHolder extends RecyclerView.ViewHolder {
 
         private TextView mTextView;
-        private LinearLayout mLinearLayout;
-
-
-
-        public void setLayout(LinearLayout layout){
-            mLinearLayout = layout;
-        }
-
-
+        private CardView mCardView;
 
 
         public ItemViewHolder(View itemView) {
             super(itemView);
-
+            mCardView = (CardView) itemView.findViewById(R.id.tab_layout);
             mTextView = (TextView) itemView.findViewById(R.id.list_item);
-
-
-
         }
     }
 
@@ -59,12 +51,13 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
         itemViewHolder.mTextView.setText(mItems.get(i).getTitle());
         pdf = mItems.get(i).getfileURL();
         temp = i;
-        itemViewHolder.mLinearLayout.setOnClickListener(new View.OnClickListener() {
+        itemViewHolder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
 
                 intent.setDataAndType(Uri.parse("http://docs.google.com/viewer?&embedded=true&url=" + mItems.get(temp).getfileURL()), "text/html");
+                mContext.startActivity(intent);
 
                 Toast.makeText(itemViewHolder.itemView.getContext(), "Press back to return to KUSD", Toast.LENGTH_LONG).show();
 
