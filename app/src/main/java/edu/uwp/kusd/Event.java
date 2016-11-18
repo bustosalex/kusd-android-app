@@ -66,7 +66,7 @@ public class Event extends RealmObject implements Comparable<Event>, Serializabl
      * @param school the school or schools involed in an event
      * @param details the details of an event
      */
-    public Event(String id, String eventTitle, String date, String school, String details, String fullDateInfo, String pdf) {
+    public Event(String id, String eventTitle, String date, String school, String details, String fullDateInfo, String pdf, String year, String month, String day) {
         this.mId = id;
         this.mEventTitle = eventTitle;
         this.mDate = date;
@@ -74,6 +74,9 @@ public class Event extends RealmObject implements Comparable<Event>, Serializabl
         this.mDetails = details;
         this.mFullDateInfo = fullDateInfo;
         this.mPDF = pdf;
+        this.mYear = year;
+        this.mMonth = month;
+        this.mDay = day;
     }
 
     public String getId() {

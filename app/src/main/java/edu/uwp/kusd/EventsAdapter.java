@@ -2,7 +2,6 @@ package edu.uwp.kusd;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -10,14 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
-
-import io.realm.Realm;
 
 /**
  * Created by Dakota on 11/5/2016.
@@ -25,14 +22,15 @@ import io.realm.Realm;
 
 public class EventsAdapter extends RealmRecyclerViewAdapter<Event> {
 
-    final Context context;
+    private final Context mContext;
     private Calendar c = Calendar.getInstance();
     private int currentYear = c.get(Calendar.YEAR);
     private int currentMonth = c.get(Calendar.MONTH) + 1;
     private int currentDay = c.get(Calendar.DAY_OF_MONTH);
+    private Event mEvent;
 
     public EventsAdapter(Context context) {
-        this.context = context;
+        this.mContext = context;
     }
 
     @Override
@@ -44,26 +42,17 @@ public class EventsAdapter extends RealmRecyclerViewAdapter<Event> {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
 
-        final Event event = getItem(position);
-        final EventViewHolder holder = (EventViewHolder) viewHolder;
+        Event event = getItem(position);
+        EventViewHolder holder = (EventViewHolder) viewHolder;
+        Event temp = new Event(event.getId(), event.getEventTitle(), event.getDate(), event.getSchool(), event.getDetails(), " ", event.getPDF(), event.getYear(), event.getMonth(), event.getDay());
+        holder.bindEvent(temp);
 
+
+        /*
         holder.eventNameTextView.setText(event.getEventTitle().replace("&#039;", "'"));
         holder.dayTextView.setText(Integer.toString(event.getDayFromDate()));
         holder.monthNameTextView.setText(new DateFormatSymbols().getMonths()[event.getMonthFromDate() - 1].toUpperCase());
-        if (event.getPDF() != null) {
-            if (Integer.parseInt(event.getDay()) >= currentDay && Integer.parseInt(event.getMonth()) >= currentMonth && Integer.parseInt(event.getYear()) >= currentYear) {
-                holder.pdfArrow.setVisibility(View.VISIBLE);
-                holder.cardView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setDataAndType(Uri.parse("http://docs.google.com/viewer?&embedded=true&url=" + event.getPDF()), "text/html");
-                        context.startActivity(intent);
-                        Toast.makeText(context, "Press back to return to KUSD", Toast.LENGTH_LONG).show();
-                    }
-                });
-            }
-        }
+        */
     }
 
     @Override
@@ -98,6 +87,10 @@ public class EventsAdapter extends RealmRecyclerViewAdapter<Event> {
 
         private ImageButton pdfArrow;
 
+        private LinearLayout mClickableEvent;
+
+        private Event mEvent;
+
         /**
          * Constructs an EventViewHolder containing a card view, event name, school name, and day.
          *
@@ -110,6 +103,14 @@ public class EventsAdapter extends RealmRecyclerViewAdapter<Event> {
             eventNameTextView = (TextView) eventView.findViewById(R.id.event_name_text_view);
             dayTextView = (TextView) eventView.findViewById(R.id.day_text_view);
             monthNameTextView = (TextView) eventView.findViewById(R.id.month_name_text_view);
+            mClickableEvent = (LinearLayout) eventView.findViewById(R.id.clickable_event);
+        }
+
+        public void bindEvent(Event event) {
+            mEvent = event;
+            eventNameTextView.setText(event.getEventTitle().replace("&#039;", "'"));
+            dayTextView.setText(Integer.toString(event.getDayFromDate()));
+            monthNameTextView.setText(new DateFormatSymbols().getMonths()[event.getMonthFromDate() - 1].toUpperCase());
         }
     }
 }

@@ -139,6 +139,8 @@ public class EventsFragment extends Fragment {
         //Inflate the fragments view
         final View rootView = inflater.inflate(R.layout.fragment_events, container, false);
         mProgressDialog = new ProgressDialog(getActivity(), ProgressDialog.STYLE_SPINNER);
+        mShowingEventsTextView = (TextView) rootView.findViewById(R.id.showing_events_text_view);
+        mShowingEventsTextView.setText(R.string.showing_events);
 
         //Request XML from KUSD
         //TODO: Handle request errors
@@ -151,8 +153,6 @@ public class EventsFragment extends Fragment {
         if (!mRealm.isEmpty() && !mRefreshNeeded) {
             mRecyclerView = (RecyclerView) rootView.findViewById(R.id.eventsRecyclerView);
             setupRecyclerView();
-            mShowingEventsTextView = (TextView) rootView.findViewById(R.id.showing_events_text_view);
-            mShowingEventsTextView.setText(R.string.showing_events);
             mMonthSelectorSpinner = (Spinner) rootView.findViewById(R.id.event_year_spinner);
             setupSpinner();
         } else {
@@ -169,8 +169,6 @@ public class EventsFragment extends Fragment {
                     Log.i("CalendarNetwork", "Events made a network request");
 
                     mRecyclerView = (RecyclerView) rootView.findViewById(R.id.eventsRecyclerView);
-                    mShowingEventsTextView = (TextView) rootView.findViewById(R.id.showing_events_text_view);
-                    mShowingEventsTextView.setText(R.string.showing_events);
                     mMonthSelectorSpinner = (Spinner) rootView.findViewById(R.id.event_year_spinner);
                     if (isAdded()) {
                         ArrayAdapter<String> tempArrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, new String[]{"Choose a month"});
