@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/app_section_icon_image"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginStart="32dp" />
+
+                <TextView
+                    android:id="@+id/app_section_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="App Section"
+                    android:layout_below="@id/app_section_icon_image"
+                    android:textSize="12sp"
+                    android:layout_centerHorizontal="true"
+                    android:maxLines="1"/>
+
+        </RelativeLayout>
+
+</RelativeLayout>

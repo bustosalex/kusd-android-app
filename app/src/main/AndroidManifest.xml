@@ -3,6 +3,11 @@
     package="edu.uwp.kusd">
     <uses-permission android:name="android.permission.INTERNET"/>
 
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGEEAD"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,25 +15,39 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name=".network.VolleyApplication">
-        <activity android:name=".HomeActivity">
+        <activity android:name=".HomeActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NewsActivity" />
-        <activity android:name=".CalendarActivity"
+
+        <activity android:name=".News.NewsActivity"
             android:parentActivityName=".HomeActivity"
             android:theme="@style/AppThemeNoActionBar"/>
+        <activity android:name=".CalendarActivity"
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppThemeNoActionBar"
+            android:screenOrientation="portrait"/>
 
-        <activity android:name=".LunchActivity" />
+        <activity android:name=".LunchActivity"
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppThemeNoActionBar"/>
         <activity android:name=".SchoolsActivity" />
         <activity android:name=".SocialMediaActivity" />
         <activity android:name=".FeaturesActivity" />
         <activity android:name=".TextAlertActivity" />
-        <activity android:name=".BoardMembersActivity" />
-        <activity android:name=".InfiniteCampusActivity"></activity>
+
+        <activity android:name=".News.NewsDetails"></activity>
+
+
+        <activity android:name=".BoardMembersActivity"
+                  android:parentActivityName=".HomeActivity"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppThemeNoActionBar"/>
+        <activity android:name=".InfiniteCampusActivity"/>
+        <activity android:name=".PdfReaderActivity"/>
 
     </application>
 

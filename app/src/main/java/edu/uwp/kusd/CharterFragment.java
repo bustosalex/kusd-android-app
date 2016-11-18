@@ -4,19 +4,13 @@ package edu.uwp.kusd;
  * Created by Liz on 10/17/2016.
  */
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
 
 import android.support.v4.app.Fragment;
@@ -43,7 +37,7 @@ public class CharterFragment extends Fragment {
 
     private RecyclerView rv;
 
-    public RVAdapter adapter;
+    public SRVAdapter adapter;
 
     /**
      * Create the view for the fragment, request the XML data from KUSD, and parse the items.
@@ -85,7 +79,7 @@ public class CharterFragment extends Fragment {
                 try {
                     //Parse the schools into a list
                     tSchools = schoolXmlParser.parseNodes(3);
-                    adapter = new RVAdapter(tSchools, getActivity());
+                    adapter = new SRVAdapter(tSchools, getActivity());
                     rv.setAdapter(adapter);
 
 

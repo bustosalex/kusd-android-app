@@ -47,7 +47,7 @@ public class ElemFragment extends Fragment {
 
     private RecyclerView rv;
 
-    public RVAdapter adapter;
+    public SRVAdapter adapter;
 
     public Context context;
 
@@ -89,7 +89,7 @@ public class ElemFragment extends Fragment {
                     //Parse the schools into a list
                     tSchools = schoolXmlParser.parseNodes(0);
 
-                    adapter = new RVAdapter(tSchools, getActivity());
+                    adapter = new SRVAdapter(tSchools, getActivity());
                     rv.setAdapter(adapter);
 
                 } catch (XmlPullParserException | IOException | ParseException e) {

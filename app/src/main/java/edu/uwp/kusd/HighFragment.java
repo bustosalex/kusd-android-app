@@ -16,7 +16,6 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
 
 import android.support.v4.app.Fragment;
@@ -52,7 +51,7 @@ public class HighFragment extends Fragment {
      */
     private RecyclerView rv;
 
-    public RVAdapter adapter;
+    public SRVAdapter adapter;
 
     /**
      * Create the view for the fragment, request the XML data from KUSD, and parse the items.
@@ -94,7 +93,7 @@ public class HighFragment extends Fragment {
                     //Parse the schools into a list
                     tSchools = schoolXmlParser.parseNodes(2);
 
-                    adapter = new RVAdapter(tSchools, getActivity());
+                    adapter = new SRVAdapter(tSchools, getActivity());
                     rv.setAdapter(adapter);
 
 
