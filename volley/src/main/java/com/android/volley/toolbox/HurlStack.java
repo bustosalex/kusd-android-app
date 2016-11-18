@@ -59,7 +59,8 @@ public class HurlStack implements HttpStack {
          * Returns a URL to use instead of the provided one, or null to indicate
          * this URL should not be used at all.
          */
-        String rewriteUrl(String originalUrl);
+        public String rewriteUrl(String originalUrl);
+
     }
 
     private final UrlRewriter mUrlRewriter;

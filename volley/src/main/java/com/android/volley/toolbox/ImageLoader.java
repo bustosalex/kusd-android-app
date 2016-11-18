@@ -72,8 +72,9 @@ public class ImageLoader {
      * must not block. Implementation with an LruCache is recommended.
      */
     public interface ImageCache {
-        Bitmap getBitmap(String url);
-        void putBitmap(String url, Bitmap bitmap);
+        public Bitmap getBitmap(String url);
+        public void putBitmap(String url, Bitmap bitmap);
+
     }
 
     /**
@@ -139,7 +140,8 @@ public class ImageLoader {
          * image loading in order to, for example, run an animation to fade in network loaded
          * images.
          */
-        void onResponse(ImageContainer response, boolean isImmediate);
+        public void onResponse(ImageContainer response, boolean isImmediate);
+
     }
 
     /**

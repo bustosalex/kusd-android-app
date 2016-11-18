@@ -40,9 +40,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class RequestQueue {
 
     /** Callback interface for completed requests. */
-    public interface RequestFinishedListener<T> {
+    public static interface RequestFinishedListener<T> {
         /** Called when a request has finished processing. */
-        void onRequestFinished(Request<T> request);
+        public void onRequestFinished(Request<T> request);
+
     }
 
     /** Used for generating monotonically-increasing sequence numbers for requests. */
@@ -186,7 +187,8 @@ public class RequestQueue {
      * {@link RequestQueue#cancelAll(RequestFilter)}.
      */
     public interface RequestFilter {
-        boolean apply(Request<?> request);
+        public boolean apply(Request<?> request);
+
     }
 
     /**

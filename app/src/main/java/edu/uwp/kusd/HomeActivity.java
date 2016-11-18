@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.uwp.kusd.News.NewsActivity;
+
 public class HomeActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;

@@ -80,6 +80,7 @@ public class EventsFragment extends Fragment {
      */
     private String filterDate;
 
+
     /**
      * A HashMap with EventDates and keys and lists of events as values.
      */

@@ -9,7 +9,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 /**
- * Created by Dakota on 10/16/2016.
+ * Created by Dakota on 10/23/2016.
  */
 
 public final class InternalStorage {
@@ -24,11 +24,12 @@ public final class InternalStorage {
         fos.close();
     }
 
-    public static Object readObject(Context context, String key) throws IOException,
-            ClassNotFoundException {
+    public static Object readObject(Context context, String key) throws IOException, ClassNotFoundException {
+
         FileInputStream fis = context.openFileInput(key);
         ObjectInputStream ois = new ObjectInputStream(fis);
         Object object = ois.readObject();
         return object;
     }
 }
+
