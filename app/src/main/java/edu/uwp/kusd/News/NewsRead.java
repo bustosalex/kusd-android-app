@@ -9,6 +9,7 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import static edu.uwp.kusd.R.id.text;
 
 public class NewsRead {
     private List<NewsItems> newsItems= new ArrayList<NewsItems>();
@@ -24,21 +25,20 @@ public class NewsRead {
     }
 
     public List<NewsItems> parse(InputStream is) {
-        //new up a parser
         try {
             XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
             factory.setNamespaceAware(true);
             XmlPullParser  parser = factory.newPullParser();
 
             parser.setInput(is, null);
-            //parse until the end of doc
+
             int eventType = parser.getEventType();
             while (eventType != XmlPullParser.END_DOCUMENT) {
                 String tagname = parser.getName();
                 switch (eventType) {
                     case XmlPullParser.START_TAG:
                         if (tagname.equalsIgnoreCase("node")) {
-                            // create a new instance of news item
+                            // create a new instance of employee
                             newsItem = new NewsItems(title,date,desc);
                         }
                         break;
@@ -49,14 +49,15 @@ public class NewsRead {
 
                     case XmlPullParser.END_TAG:
                         if (tagname.equalsIgnoreCase("node")) {
-                            // add news object to list depending on tag
+                            // add employee object to list
                             newsItems.add(newsItem);
                         } else if (tagname.equalsIgnoreCase("title")) {
                             newsItem.setNewsItem(text);
                         }else if (tagname.equalsIgnoreCase("date")) {
                             newsItem.setNewsDate(text);
-                        }  else if (tagname.equalsIgnoreCase("p")) {
-                            newsItem.setNewsContent(text);
+                        }  else if (tagname.equalsIgnoreCase("story")) {
+
+                            newsItem.setNewsContent(text.replaceAll("<[^>]+>",""));
                         }
                         break;
 
