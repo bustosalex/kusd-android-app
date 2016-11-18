@@ -53,4 +53,3 @@ public class VolleySingleton {
         return mImageLoader;
     }
 }
-

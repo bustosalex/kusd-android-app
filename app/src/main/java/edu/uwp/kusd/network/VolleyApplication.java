@@ -25,4 +25,7 @@ public class VolleyApplication extends Application {
         return sInstance.getApplicationContext();
     }
 }
+<<<<<<< HEAD
+=======
 
+>>>>>>> dev
