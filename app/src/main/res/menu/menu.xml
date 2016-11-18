@@ -8,7 +8,7 @@
         android:title="School Boundaries" />
     <item
         android:id="@+id/hours_day"
-        android:title="Hours of the Scbool Day" />
+        android:title="Hours of the School Day" />
     <item
         android:id="@+id/choice_charter"
         android:title="Choice/Charter Schools" />

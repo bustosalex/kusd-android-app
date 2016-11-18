@@ -13,6 +13,7 @@
         <activity android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -27,7 +28,7 @@
         <activity android:name=".FeaturesActivity" />
         <activity android:name=".TextAlertActivity" />
         <activity android:name=".BoardMembersActivity" />
-        <activity android:name=".InfiniteCampusActivity" />
+        <activity android:name=".InfiniteCampusActivity"></activity>
 
     </application>
 
