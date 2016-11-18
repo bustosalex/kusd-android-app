@@ -5,17 +5,12 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.text.Html;
-import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.view.MenuInflater;
-import android.widget.TextView;
 
-import static android.support.v7.appcompat.R.styleable.View;
 
 
 public class SchoolsActivity extends AppCompatActivity {
@@ -26,17 +21,17 @@ public class SchoolsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_schools);
 
 
-        // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(false);
         actionBar.setTitle("Schools");
 
+        //tablayout code
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Elementary"));
+        tabLayout.addTab(tabLayout.newTab().setText("Elem."));
         tabLayout.addTab(tabLayout.newTab().setText("Middle"));
-        tabLayout.addTab(tabLayout.newTab().setText("High"));
-        tabLayout.addTab(tabLayout.newTab().setText("Charter"));
+       tabLayout.addTab(tabLayout.newTab().setText("High"));
+       tabLayout.addTab(tabLayout.newTab().setText("Charter"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
@@ -62,10 +57,7 @@ public class SchoolsActivity extends AppCompatActivity {
             }
         });
 
-      //  TextView link = (TextView) findViewById(R.id.name);
-       // String linkText = "This is my website <a href="SCHOOL WEBSITE">name</a> .";
-      //  link.setText(Html.fromHtml(linkText));
-      //  link.setMovementMethod(LinkMovementMethod.getInstance());
+
     }
 
 
@@ -80,6 +72,7 @@ public class SchoolsActivity extends AppCompatActivity {
 
 
     @Override
+    //the menu for other pages on the "schools" webpage
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
