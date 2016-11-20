@@ -2,13 +2,13 @@ package edu.uwp.kusd;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import edu.uwp.kusd.News.NewsActivity;
+import edu.uwp.kusd.textAlerts.TextAlertActivity;
 
 public class HomeActivity extends AppCompatActivity {
 
