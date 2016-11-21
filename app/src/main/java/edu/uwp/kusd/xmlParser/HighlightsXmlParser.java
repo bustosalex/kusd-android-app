@@ -16,13 +16,12 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.uwp.kusd.calendar.PdfCalendar;
-import io.realm.Realm;
+import edu.uwp.kusd.homepage.Highlight;
 
 /**
  * A class to parse XML for events.
  */
-public class PdfCalendarXmlParser {
+public class HighlightsXmlParser {
 
     /**
      * An input stream used to parse the XML from a string.
@@ -39,21 +38,15 @@ public class PdfCalendarXmlParser {
      */
     XmlPullParser parser;
 
-    Realm mRealm;
-
     private String xml;
-
-    private List<String> skipDates;
 
     /**
      * Constructs an EventXmlParser with a string of XML data as a parameter.
      *
      * @param xmlData string of XML data
      */
-    public PdfCalendarXmlParser(String xmlData) {
+    public HighlightsXmlParser(String xmlData) {
         try {
-            mRealm = Realm.getDefaultInstance();
-            skipDates = new ArrayList<>();
             xml = xmlData;
             xmlInputStream = new ByteArrayInputStream(xmlData.getBytes("UTF-8"));
             xmlPullParserFactory = XmlPullParserFactory.newInstance();
@@ -71,16 +64,17 @@ public class PdfCalendarXmlParser {
      * @throws IOException
      * @throws ParseException
      */
-    public void parseNodes() throws XmlPullParserException, IOException, ParseException {
+    public List<Highlight> parseNodes() throws XmlPullParserException, IOException, ParseException {
         //Parse each event node
+        List<Highlight> highlights = new ArrayList<>();
         while (parser.next() != XmlPullParser.END_TAG) {
             if (parser.getEventType() != XmlPullParser.START_TAG) {
                 continue;
             }
-            parsePdfCalendar();
+            highlights.add(parseHighlight());
         }
-        mRealm.close();
         closeXmlSteam();
+        return highlights;
     }
 
     /**
@@ -90,10 +84,11 @@ public class PdfCalendarXmlParser {
      * @throws IOException
      * @throws XmlPullParserException
      */
-    private void parsePdfCalendar() throws IOException, XmlPullParserException {
+    private Highlight parseHighlight() throws IOException, XmlPullParserException {
         parser.require(XmlPullParser.START_TAG, null, "node");
-        String fileTitle = null;
-        String fileUrl = null;
+        String imageTitle = null;
+        String imageUrl = null;
+        String imageLink = null;
 
         while (parser.next() != XmlPullParser.END_TAG) {
             if (parser.getEventType() != XmlPullParser.START_TAG) {
@@ -101,19 +96,17 @@ public class PdfCalendarXmlParser {
             }
             String name = parser.getName();
             if (name.equals("title")) {
-                fileTitle = readTitle();
-
-            } else if (name.equals("file")) {
-                fileUrl = readFileUrl();
+                imageTitle = readTitle();
+            } else if (name.equals("image")) {
+                imageUrl = readImageUrl();
+            } else if (name.equals("link")) {
+                imageLink = readImageLink();
+            } else if (name.equals("body")) {
+                skip();
             }
         }
-        mRealm.beginTransaction();
-        PdfCalendar pdf = mRealm.createObject(PdfCalendar.class);
-        pdf.setFileTitle(fileTitle);
-        pdf.setFileURL(fileUrl);
-        mRealm.commitTransaction();
+        return new Highlight(imageTitle, imageUrl, imageLink);
     }
-
 
     /**
      * Helper method to read the title of a file
@@ -136,10 +129,17 @@ public class PdfCalendarXmlParser {
      * @throws IOException
      * @throws XmlPullParserException
      */
-    private String readFileUrl() throws IOException, XmlPullParserException {
-        parser.require(XmlPullParser.START_TAG, null, "file");
+    private String readImageUrl() throws IOException, XmlPullParserException {
+        parser.require(XmlPullParser.START_TAG, null, "image");
         String details = readText();
-        parser.require(XmlPullParser.END_TAG, null, "file");
+        parser.require(XmlPullParser.END_TAG, null, "image");
+        return details;
+    }
+
+    private String readImageLink() throws IOException, XmlPullParserException {
+        parser.require(XmlPullParser.START_TAG, null, "link");
+        String details = readText();
+        parser.require(XmlPullParser.END_TAG, null, "link");
         return details;
     }
 

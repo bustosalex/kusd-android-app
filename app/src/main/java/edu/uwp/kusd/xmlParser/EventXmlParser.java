@@ -4,7 +4,6 @@ package edu.uwp.kusd.xmlParser;
  * Created by Dakota on 11/12/2016.
  */
 
-import android.content.Context;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -16,15 +15,10 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import edu.uwp.kusd.Event;
-import edu.uwp.kusd.realm.RealmController;
+import edu.uwp.kusd.calendar.Event;
 import io.realm.Realm;
 
 /**
@@ -40,14 +34,14 @@ public class EventXmlParser {
     /**
      * Used in parsing the XML.
      */
-    XmlPullParserFactory xmlPullParserFactory;
+    private XmlPullParserFactory xmlPullParserFactory;
 
     /**
      * Used in parsing the XML.
      */
-    XmlPullParser parser;
+    private XmlPullParser parser;
 
-    Realm mRealm;
+    private Realm mRealm;
 
     private String xml;
 
@@ -104,7 +98,7 @@ public class EventXmlParser {
         String date = null;
         String school = null;
         String details = null;
-        String dateString = null;
+        String dateString;
 
         while (parser.next() != XmlPullParser.END_TAG) {
             if (parser.getEventType() != XmlPullParser.START_TAG) {
@@ -118,7 +112,6 @@ public class EventXmlParser {
             } else if (name.equals("date")) {
                 try {
                     date = readDate();
-                    //  dateString = readDateString();
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -147,92 +140,35 @@ public class EventXmlParser {
             mRealm.beginTransaction();
             Event event = mRealm.createObject(Event.class);
             event.setEventTitle(title);
-            event.setDate(date);
             event.setYear(splitDate[0]);
             event.setMonth(splitDate[1]);
             event.setDay(splitDate[2]);
             event.setDetails(details);
-            String pdf = hasPdf(details);
-            if (pdf != null) {
-                event.setPDF(pdf);
-            } else {
-                event.setPDF(null);
-            }
             UUID id = UUID.randomUUID();
             event.setId(id.toString());
             event.setSchool(school);
-            event.setFullDateInfo(" ");
             mRealm.commitTransaction();
         }
     }
 
     private void processMultipleDates(String title, String details, String school, String dateString) {
-        if (dateString.matches("((\\d+-\\d+-\\d+)\\s(\\d+:\\d+:\\d+),\\s)+(\\d+-\\d+-\\d+)\\s(\\d+:\\d+:\\d+){1}")) {
-            String[] dates = dateString.split(",\\s");
-            for (String date : dates) {
-                date = date.substring(0, date.indexOf(" "));
-                String[] splitDate = date.split("-");
-                mRealm.beginTransaction();
-                Event event = mRealm.createObject(Event.class);
-                event.setEventTitle(title);
-                event.setDate(date);
-                event.setYear(splitDate[0]);
-                event.setMonth(splitDate[1]);
-                event.setDay(splitDate[2]);
-                event.setDetails(details);
-                String pdf = hasPdf(details);
-                if (pdf != null) {
-                    event.setPDF(pdf);
-                } else {
-                    event.setPDF(null);
-                }
-                UUID id = UUID.randomUUID();
-                event.setId(id.toString());
-                event.setSchool(school);
-                event.setFullDateInfo(" ");
-                mRealm.commitTransaction();
-            }
-            skipDates.add(dateString);
-
-        } else if (dateString.matches("((\\d+-\\d+-\\d+)\\s(\\d+:\\d+:\\d+)\\s(to)\\s(\\d+-\\d+-\\d+)\\s(\\d+:\\d+:\\d+),\\s)+(\\d+-\\d+-\\d+)\\s(\\d+:\\d+:\\d+)\\s(to)\\s(\\d+-\\d+-\\d+)\\s(\\d+:\\d+:\\d+)")) {
-            String[] dates = dateString.split(",\\s");
-            for (String date : dates) {
-                date = date.substring(0, date.indexOf(" "));
-                String[] splitDate = date.split("-");
-                mRealm.beginTransaction();
-                Event event = mRealm.createObject(Event.class);
-                event.setEventTitle(title);
-                event.setDate(date);
-                event.setYear(splitDate[0]);
-                event.setMonth(splitDate[1]);
-                event.setDay(splitDate[2]);
-                event.setDetails(details);
-                String pdf = hasPdf(details);
-                if (pdf != null) {
-                    event.setPDF(pdf);
-                } else {
-                    event.setPDF(null);
-                }
-                UUID id = UUID.randomUUID();
-                event.setId(id.toString());
-                event.setSchool(school);
-                event.setFullDateInfo(" ");
-                mRealm.commitTransaction();
-            }
-            skipDates.add(dateString);
+        String[] dates = dateString.split(",\\s");
+        for (String date : dates) {
+            date = date.substring(0, date.indexOf(" "));
+            String[] splitDate = date.split("-");
+            mRealm.beginTransaction();
+            Event event = mRealm.createObject(Event.class);
+            event.setEventTitle(title);
+            event.setYear(splitDate[0]);
+            event.setMonth(splitDate[1]);
+            event.setDay(splitDate[2]);
+            event.setDetails(details);
+            UUID id = UUID.randomUUID();
+            event.setId(id.toString());
+            event.setSchool(school);
+            mRealm.commitTransaction();
         }
-    }
-
-    private String hasPdf(String details) {
-        if (details != null) {
-            String[] splitDetails = details.split("\"");
-            for (int i = 0; i < splitDetails.length; i++) {
-                if (splitDetails[i].matches("(([\\w\\.\\-\\+]+:)\\/{2}(([\\w\\d\\.]+):([\\w\\d\\.]+))?@?(([a-zA-Z0-9\\.\\-_]+)(?::(\\d{1,5}))?))?(\\/(?:[a-zA-Z0-9\\.\\-\\/\\+\\%]+)?)(?:\\?([a-zA-Z0-9=%\\-_\\.\\*&;]+))?(?:#([a-zA-Z0-9\\-=,&%;\\/\\\\\"'\\?]+)?)?")) {
-                    return splitDetails[i];
-                }
-            }
-        }
-        return null;
+        skipDates.add(dateString);
     }
 
     /**
@@ -317,20 +253,6 @@ public class EventXmlParser {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Helper method to parse the text for the date of an event into an EventDate object.
-     *
-     * @param input the input date
-     * @return a parsed EventDate
-     */
-    private Date parseDate(String input) {
-        String[] fields = input.split("-");
-        Date date = new Date();
-        Calendar c = Calendar.getInstance();
-        //return new EventDate(Integer.parseInt(fields[0]), Integer.parseInt(fields[1]), Integer.parseInt(fields[2]));
-        return null;
     }
 
     private void skip() throws XmlPullParserException, IOException {
