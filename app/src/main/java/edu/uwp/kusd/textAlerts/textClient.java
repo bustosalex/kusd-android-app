@@ -12,7 +12,7 @@ import retrofit2.http.Part;
  * Created by Little Cody on 11/19/2016.
  */
 
-public interface TextClient {
+interface textClient {
     @Multipart
     @POST("/text-alerts.php")
     Call<String> postPhone(@Part("firstname") String firstname, @Part("lastname") String lastname, @Part("number") String number);

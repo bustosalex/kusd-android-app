@@ -1,16 +1,12 @@
 package edu.uwp.kusd.textAlerts;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
-import java.io.IOException;
 
 import edu.uwp.kusd.R;
 import retrofit2.Call;
@@ -40,7 +36,7 @@ public class TextAlertActivity extends AppCompatActivity {
 
                 final AlertDialog.Builder builder = new AlertDialog.Builder(TextAlertActivity.this);
 
-                TextClient client = ServiceGenerator.createService(TextClient.class);
+                textClient client = ServiceGenerator.createService(textClient.class);
                 Call<String> call = client.postPhone(firstName, lastName, phoneNumber);
                 call.enqueue(new Callback<String>() {
                     @Override
