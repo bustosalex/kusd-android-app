@@ -14,6 +14,7 @@ public class LunchActivity_ViewPageAdapter extends   FragmentStatePagerAdapter {
 
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
+       // private final List<String> mFragmentpdfUrl = new ArrayList<>();
 
         public LunchActivity_ViewPageAdapter(FragmentManager fm) {
             super(fm);
@@ -37,6 +38,8 @@ public class LunchActivity_ViewPageAdapter extends   FragmentStatePagerAdapter {
         public void addFragment(Fragment fragment, String title) {
             mFragmentList.add(fragment);
             mFragmentTitleList.add(title);
+           // mFragmentpdfUrl.add(pdfURL);
+
         }
 
 

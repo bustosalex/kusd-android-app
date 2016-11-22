@@ -32,7 +32,7 @@ public class LunchObj {
     public void setCategory(String category){
         this.category = category;
     }
-
+//Create a copy of the lunch object
     public  void cloneLunch(LunchObj object){
         this.category = object.getCategory();
         this.title = object.getTitle();

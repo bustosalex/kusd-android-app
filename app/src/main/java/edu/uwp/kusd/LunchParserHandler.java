@@ -19,6 +19,7 @@ public class LunchParserHandler {
     private LunchObj lunchObj;
     private String text;
 
+
     public LunchParserHandler(){
         schoolLunches = new ArrayList<LunchObj>();
     }
@@ -53,7 +54,7 @@ public class LunchParserHandler {
                     case XmlPullParser.TEXT:
                         text = parser.getText();
                         break;
-
+                    //Grabs the title, pdf file url and the type of school through parsing the xml.
                     case XmlPullParser.END_TAG:
                         if (tagname.equalsIgnoreCase("node")) {
                             // add new school to list
