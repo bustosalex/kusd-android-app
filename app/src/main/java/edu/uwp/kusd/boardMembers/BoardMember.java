@@ -1,4 +1,4 @@
-package edu.uwp.kusd;
+package edu.uwp.kusd.boardMembers;
 
 import android.graphics.Bitmap;
 
@@ -50,13 +50,5 @@ public class BoardMember {
 
     public Date getTerm() {
         return mTerm;
-    }
-
-    public void setPhoto(Bitmap photo) {
-        mPhoto = photo;
-    }
-
-    public Bitmap getPhoto() {
-        return mPhoto;
     }
 }

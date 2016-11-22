@@ -15,9 +15,10 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/app_section_icon_image"
                     android:layout_marginBottom="4dp"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginEnd="32dp"
-                    android:layout_marginStart="32dp" />
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="50dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_centerHorizontal="true"/>
 
                 <TextView
                     android:id="@+id/app_section_name"

@@ -1,4 +1,4 @@
-package edu.uwp.kusd;
+package edu.uwp.kusd.homepage;
 
 public class AppSection {
 

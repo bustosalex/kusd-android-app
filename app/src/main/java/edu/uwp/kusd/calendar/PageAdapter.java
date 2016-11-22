@@ -1,10 +1,13 @@
 // TODO: 10/3/2016 - Documentation
 
-package edu.uwp.kusd;
+package edu.uwp.kusd.calendar;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
+import edu.uwp.kusd.calendar.EventsFragment;
+import edu.uwp.kusd.calendar.PdfCalendarsFragment;
 
 /**
  * A class for an adapter for the TabLayout.

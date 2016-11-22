@@ -5,14 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" 
     android:orientation="vertical"
-    tools:context="edu.uwp.kusd.BoardMembersActivity">
+    tools:context="edu.uwp.kusd.boardMembers.BoardMembersActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:background="@color/colorPrimary"
         android:elevation="6dp"
         android:minHeight="?attr/actionBarSize"

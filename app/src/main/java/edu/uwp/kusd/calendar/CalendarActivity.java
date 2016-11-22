@@ -1,15 +1,17 @@
 //TODO: Implement callback methods
 
-package edu.uwp.kusd;
+package edu.uwp.kusd.calendar;
 
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import edu.uwp.kusd.R;
 
 /**
  * Class for the Calendars activity. The activity houses two tabs: an events tab and a PDF Calendars tab.

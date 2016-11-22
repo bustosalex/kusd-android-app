@@ -23,7 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <com.android.volley.toolbox.NetworkImageView
+                <ImageView
                     android:scaleType="centerCrop"
                     android:adjustViewBounds="true"
                     android:id="@+id/board_photo"

@@ -1,9 +1,10 @@
 // TODO: 10/3/2016 - Documentation
 
-package edu.uwp.kusd;
+package edu.uwp.kusd.calendar;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,17 +12,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import java.util.List;
+import android.widget.Toast;
+
+import edu.uwp.kusd.R;
+import edu.uwp.kusd.realm.RealmRecyclerViewAdapter;
 
 /**
  * An adapter for the PdfCalendar RecyclerView
  */
-public class PdfCalendarRVAdapter extends RecyclerView.Adapter<PdfCalendarRVAdapter.PdfCalendarViewHolder> {
-
-    /**
-     * A list of PdfCalendars.
-     */
-    private List<PdfCalendar> pdfCalendars;
+public class PdfCalendarAdapter extends RealmRecyclerViewAdapter<PdfCalendar> {
 
     /**
      * The context.
@@ -31,11 +30,9 @@ public class PdfCalendarRVAdapter extends RecyclerView.Adapter<PdfCalendarRVAdap
     /**
      * Constructs an adapter for the PdfCalendar RecyclerView.
      *
-     * @param pdfCalendars a list of PdfCalendars
      * @param context the context
      */
-    public PdfCalendarRVAdapter(List<PdfCalendar> pdfCalendars, Context context) {
-        this.pdfCalendars = pdfCalendars;
+    public PdfCalendarAdapter(Context context) {
         this.context = context;
     }
 
@@ -55,11 +52,6 @@ public class PdfCalendarRVAdapter extends RecyclerView.Adapter<PdfCalendarRVAdap
         private TextView fileTitleTextView;
 
         /**
-         * TextView for the file description.
-         */
-        private TextView fileDescriptionTextView;
-
-        /**
          * RelativeLayout for grouping clickable items.
          */
         private RelativeLayout mClickableLayout;
@@ -74,27 +66,30 @@ public class PdfCalendarRVAdapter extends RecyclerView.Adapter<PdfCalendarRVAdap
             cardView = (CardView) pdfCalendarView.findViewById(R.id.cardView);
             mClickableLayout = (RelativeLayout) pdfCalendarView.findViewById(R.id.clickable_card);
             fileTitleTextView = (TextView) pdfCalendarView.findViewById(R.id.pdf_title);
-            fileDescriptionTextView = (TextView) pdfCalendarView.findViewById(R.id.pdf_description);
         }
     }
 
     /**
      * Binds the PdfCalendar data to a view.
      *
-     * @param pdfCalendarViewHolder a PdfCalendarViewHolder
-     * @param position the position to bind at
+     * @param viewHolder a PdfCalendarViewHolder
+     * @param position   the position to bind at
      */
     @Override
-    public void onBindViewHolder(final PdfCalendarViewHolder pdfCalendarViewHolder, final int position) {
-        pdfCalendarViewHolder.fileTitleTextView.setText(pdfCalendars.get(position).getFileTitle());
-        pdfCalendarViewHolder.fileDescriptionTextView.setText(pdfCalendars.get(position).getFileDescription());
+    public void onBindViewHolder(final RecyclerView.ViewHolder viewHolder, final int position) {
 
+        final PdfCalendar pdfCalendar = getItem(position);
+        final PdfCalendarViewHolder holder = (PdfCalendarViewHolder) viewHolder;
+
+        holder.fileTitleTextView.setText(pdfCalendar.getFileTitle());
         //onClick listener for each item in the list
-        pdfCalendarViewHolder.mClickableLayout.setOnClickListener(new View.OnClickListener() {
+        holder.mClickableLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = PdfReaderActivity.newIntent(context, pdfCalendars.get(pdfCalendarViewHolder.getAdapterPosition()).getFileName(), "Calendars");
-                context.startActivity(i);
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setDataAndType(Uri.parse("http://docs.google.com/viewer?&embedded=true&url=" + pdfCalendar.getFileURL()), "text/html");
+                context.startActivity(intent);
+                Toast.makeText(context, "Press back to return to KUSD", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -102,7 +97,7 @@ public class PdfCalendarRVAdapter extends RecyclerView.Adapter<PdfCalendarRVAdap
     /**
      * Inflates the layout for a card on ViewHolder creation.
      *
-     * @param parent the parent ViewGroup
+     * @param parent   the parent ViewGroup
      * @param viewType the ViewType
      * @return a PdfCalendarViewHolder
      */
@@ -119,6 +114,9 @@ public class PdfCalendarRVAdapter extends RecyclerView.Adapter<PdfCalendarRVAdap
      */
     @Override
     public int getItemCount() {
-        return pdfCalendars.size();
+        if (getRealmAdapter() != null) {
+            return getRealmAdapter().getCount();
+        }
+        return 0;
     }
 }
