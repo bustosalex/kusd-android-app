@@ -36,7 +36,7 @@ import edu.uwp.kusd.News.NewsActivity;
 import edu.uwp.kusd.R;
 import edu.uwp.kusd.SchoolsActivity;
 import edu.uwp.kusd.SocialMediaActivity;
-import edu.uwp.kusd.TextAlertActivity;
+import edu.uwp.kusd.textAlerts.TextAlertActivity;
 import edu.uwp.kusd.boardMembers.BoardMembersActivity;
 import edu.uwp.kusd.calendar.CalendarActivity;
 import edu.uwp.kusd.network.VolleySingleton;

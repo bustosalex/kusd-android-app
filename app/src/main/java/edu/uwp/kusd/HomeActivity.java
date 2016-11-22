@@ -7,7 +7,12 @@ import android.support.v7.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.uwp.kusd.boardMembers.BoardMembersActivity;
+import edu.uwp.kusd.calendar.CalendarActivity;
+import edu.uwp.kusd.homepage.AppSection;
 import edu.uwp.kusd.News.NewsActivity;
+import edu.uwp.kusd.homepage.HomeActivityRVAdapter;
+import edu.uwp.kusd.homepage.NoScrollGridLayoutManager;
 import edu.uwp.kusd.textAlerts.TextAlertActivity;
 
 public class HomeActivity extends AppCompatActivity {

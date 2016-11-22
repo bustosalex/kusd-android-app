@@ -6,7 +6,7 @@ public class AppSection {
     private Class className;
     private String sectionName;
 
-    AppSection(int icon, Class className, String sectionName) {
+     public AppSection(int icon, Class className, String sectionName) {
         this.icon = icon;
         this.className = className;
         this.sectionName = sectionName;
