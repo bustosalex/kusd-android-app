@@ -12,6 +12,8 @@ import retrofit2.http.Part;
  * Created by Little Cody on 11/19/2016.
  */
 
+// Changed from public interface TextClient
+
 interface textClient {
     @Multipart
     @POST("/text-alerts.php")
