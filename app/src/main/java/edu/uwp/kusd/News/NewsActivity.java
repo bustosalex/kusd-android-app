@@ -1,5 +1,6 @@
 package edu.uwp.kusd.News;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +18,7 @@ import java.util.List;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.ArrayAdapter;
@@ -32,7 +34,7 @@ import edu.uwp.kusd.R;
 import edu.uwp.kusd.network.CacheStringRequest;
 import edu.uwp.kusd.network.VolleySingleton;
 
-public class NewsActivity extends Activity {
+public class NewsActivity extends AppCompatActivity {
 
     RequestQueue requestQueue;
 
@@ -42,11 +44,19 @@ public class NewsActivity extends Activity {
     private String[] nDate;
     private String[] nContent;
     private ArrayList<NewsItems> newsItemsG;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("News");
+
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
 
 
