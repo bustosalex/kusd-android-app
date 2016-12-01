@@ -44,7 +44,7 @@ public class TextAlertActivity extends AppCompatActivity {
                         //If it works
                         if (response.isSuccessful()) {
 
-                            builder.setMessage("Submission Successful, Thank you for signing up for text Alerts")
+                            builder.setMessage("Submission successful, thank you for signing up for text alerts")
                                     .setCancelable(false)
                                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int id) {
@@ -55,7 +55,7 @@ public class TextAlertActivity extends AppCompatActivity {
                         }
                         //If you give it bad data
                         else {
-                            builder.setMessage("Submission Unsuccessful, please enter a proper 10 digit phone number")
+                            builder.setMessage("Submission unsuccessful, please enter a proper 10 digit phone number")
                                     .setCancelable(false)
                                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int id) {

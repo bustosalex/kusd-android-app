@@ -18,7 +18,8 @@
         android:textStyle="normal"
         android:text="To receive district-wide text alerts concerning emergencies and school closings, please enter your name and mobile number in the boxes below. Once you submit the form, you will receive a text within 24-48 hours from the sender 684-53 asking if you want to receive text messages from Kenosha Unified School District. You MUST respond Y to this message to be fully registered.."
         android:id="@+id/termsText"
-        android:gravity="left"
+        android:gravity="center"
+
         android:layout_alignParentTop="true"
         android:layout_marginBottom="25dp"/>
 
