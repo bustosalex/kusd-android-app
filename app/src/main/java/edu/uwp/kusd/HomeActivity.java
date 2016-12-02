@@ -9,6 +9,7 @@ import java.util.List;
 
 import edu.uwp.kusd.boardMembers.BoardMembersActivity;
 import edu.uwp.kusd.calendar.CalendarActivity;
+import edu.uwp.kusd.features.FeaturesActivity;
 import edu.uwp.kusd.homepage.AppSection;
 import edu.uwp.kusd.News.NewsActivity;
 import edu.uwp.kusd.homepage.HomeActivityRVAdapter;

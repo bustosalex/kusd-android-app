@@ -40,7 +40,10 @@
             android:theme="@style/AppThemeNoActionBar"/>
         <activity android:name=".SchoolsActivity" />
         <activity android:name=".SocialMediaActivity" />
-        <activity android:name=".FeaturesActivity" />
+        <activity android:name=".features.FeaturesActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"
+            android:parentActivityName=".homepage.HomeActivity"/>
         <activity android:name=".textAlerts.TextAlertActivity" />
 
         <activity android:name=".News.NewsDetails"></activity>
