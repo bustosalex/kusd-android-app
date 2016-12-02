@@ -9,6 +9,16 @@ public class LunchObj {
     private String fileUrl;
     private  String category;
 
+    public  LunchObj (String title, String file, String category){
+        this.title = title;
+        fileUrl = file;
+        this.category = category;
+    }
+
+    public  LunchObj(){
+
+    }
+
     public String getTitle(){
         return title;
     }

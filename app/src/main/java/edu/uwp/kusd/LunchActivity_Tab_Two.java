@@ -13,9 +13,13 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,14 +63,16 @@ public class LunchActivity_Tab_Two extends Fragment {
             public void onResponse(String response) {
 
 
-                String temp = response;
-
-
-               // Log.d("response", temp);
-
-                InputStream stream = new ByteArrayInputStream(response.getBytes(StandardCharsets.UTF_8));
-                LunchParserHandler parserHandler = new LunchParserHandler();
-                schoolLunches = parserHandler.parse(stream);
+                LunchParserHandler parserHandler = new LunchParserHandler(response);
+                try {
+                    schoolLunches = parserHandler.parseNodes();
+                } catch (XmlPullParserException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
 
 
                 items = (ArrayList<LunchObj>) schoolLunches;

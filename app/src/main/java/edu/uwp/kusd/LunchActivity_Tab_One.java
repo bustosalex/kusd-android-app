@@ -19,9 +19,13 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,34 +70,38 @@ public class LunchActivity_Tab_One extends Fragment {
             //What to do with the request
             public void onResponse(String response) {
 
-                //schoolLunches = parse(response);
-                String temp = response;
-               //temp =  temp.substring(40);
-                //Tests waht is coming in
-                //Log.d("response",temp);
-
-                InputStream stream = new ByteArrayInputStream(response.getBytes(StandardCharsets.UTF_8));
-                LunchParserHandler parserHandler = new LunchParserHandler();
-               schoolLunches =parserHandler.parse(stream);
 
 
-                items = (ArrayList<LunchObj>) schoolLunches;
-                //Creates selected items to make.
-                for (int i = 0; i < items.size(); i++) {
-                    LunchObj tempObj = new LunchObj();
-                    if (items.get(i).getCategory().equals("Elementary School Menus")) {
-                        System.out.println(items.get(i).getCategory());
-                        tempObj.setCategory(items.get(i).getCategory());
-                        tempObj.setTitle(items.get(i).getTitle());
-                        tempObj.setFileUrl(items.get(i).getfileURL());
-                        tempObj.cloneLunch(items.get(i));
-                        selectedItems.add(tempObj);
+                LunchParserHandler parserHandler = new LunchParserHandler(response);
+                try {
+                    schoolLunches = parserHandler.parseNodes();
 
+                    items = (ArrayList<LunchObj>) schoolLunches;
+                    //Creates selected items to make.
+                    for (int i = 0; i < items.size(); i++) {
+                        LunchObj tempObj = new LunchObj();
+                        if (items.get(i).getCategory().equals("Elementary School Menus")) {
+                            System.out.println(items.get(i).getCategory());
+                            tempObj.setCategory(items.get(i).getCategory());
+                            tempObj.setTitle(items.get(i).getTitle());
+                            tempObj.setFileUrl(items.get(i).getfileURL());
+                            tempObj.cloneLunch(items.get(i));
+                            selectedItems.add(tempObj);
+
+                        }
                     }
+
+                    RVAdapter adapter = new RVAdapter(getContext(), selectedItems);
+                    recyclerview.setAdapter(adapter);
+
+                } catch (XmlPullParserException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
 
-                RVAdapter adapter = new RVAdapter(getContext(), selectedItems);
-                recyclerview.setAdapter(adapter);
 
 
             }
