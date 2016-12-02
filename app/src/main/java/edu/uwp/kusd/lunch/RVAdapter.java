@@ -1,4 +1,4 @@
-package edu.uwp.kusd;
+package edu.uwp.kusd.lunch;
 
 /**
  * Created by Cabz on 10/11/2016.
@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
-import edu.uwp.kusd.lunch.LunchObj;
+import edu.uwp.kusd.R;
 
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
 

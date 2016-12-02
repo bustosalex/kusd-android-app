@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.uwp.kusd.R;
-import edu.uwp.kusd.RVAdapter;
 import edu.uwp.kusd.network.CacheStringRequest;
 import edu.uwp.kusd.network.VolleySingleton;
 import edu.uwp.kusd.xmlParser.LunchXMLParser;
