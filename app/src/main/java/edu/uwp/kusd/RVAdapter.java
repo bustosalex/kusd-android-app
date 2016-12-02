@@ -20,8 +20,6 @@ import java.util.List;
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
 
     private List<LunchObj> mItems;
-    String pdf = "";
-    int temp = 0;
     private Context mContext;
 
     public RVAdapter(Context context, List<LunchObj> mItems) {
@@ -47,15 +45,25 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
     @Override
     public void onBindViewHolder(final ItemViewHolder itemViewHolder, int i) {
         itemViewHolder.mTextView.setText(mItems.get(i).getTitle());
-        pdf = mItems.get(i).getfileURL();
-        temp = i;
+
         itemViewHolder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String pdf = "";
                 Intent intent = new Intent(Intent.ACTION_VIEW);
+                String tempString = itemViewHolder.mTextView.getText().toString();
 
-                intent.setDataAndType(Uri.parse("http://docs.google.com/viewer?&embedded=true&url=" + mItems.get(temp).getfileURL()), "text/html");
+                for (int j = 0; j < mItems.size(); j++) {
+                    if(mItems.get(j).getTitle().equals(tempString)){
+                        pdf = mItems.get(j).getfileURL();
+                        break;
+                    }
+
+                }
+
+                intent.setDataAndType(Uri.parse("http://docs.google.com/viewer?&embedded=true&url=" + pdf), "text/html");
                 mContext.startActivity(intent);
+
 
                 Toast.makeText(itemViewHolder.itemView.getContext(), "Press back to return to KUSD", Toast.LENGTH_LONG).show();
 
