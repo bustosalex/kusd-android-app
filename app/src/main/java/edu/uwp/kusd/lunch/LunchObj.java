@@ -1,4 +1,4 @@
-package edu.uwp.kusd;
+package edu.uwp.kusd.lunch;
 
 /**
  * Created by Cabz on 10/25/2016.

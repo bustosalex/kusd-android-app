@@ -1,4 +1,4 @@
-package edu.uwp.kusd;
+package edu.uwp.kusd.lunch;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,16 +15,16 @@ import com.android.volley.VolleyError;
 
 import org.xmlpull.v1.XmlPullParserException;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.uwp.kusd.R;
+import edu.uwp.kusd.RVAdapter;
 import edu.uwp.kusd.network.CacheStringRequest;
 import edu.uwp.kusd.network.VolleySingleton;
+import edu.uwp.kusd.xmlParser.LunchXMLParser;
 
 
 /**
@@ -63,7 +63,7 @@ public class LunchActivity_Tab_Three extends Fragment {
             public void onResponse(String response) {
 
 
-                LunchParserHandler parserHandler = new LunchParserHandler(response);
+                LunchXMLParser parserHandler = new LunchXMLParser(response);
                 try {
                     schoolLunches = parserHandler.parseNodes();
                 } catch (XmlPullParserException e) {

@@ -31,7 +31,7 @@ import java.util.List;
 
 import edu.uwp.kusd.FeaturesActivity;
 import edu.uwp.kusd.InfiniteCampusActivity;
-import edu.uwp.kusd.LunchActivity;
+import edu.uwp.kusd.lunch.LunchActivity;
 import edu.uwp.kusd.News.NewsActivity;
 import edu.uwp.kusd.R;
 import edu.uwp.kusd.SchoolsActivity;

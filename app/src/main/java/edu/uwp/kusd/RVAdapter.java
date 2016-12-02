@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import edu.uwp.kusd.lunch.LunchObj;
+
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
 
     private List<LunchObj> mItems;

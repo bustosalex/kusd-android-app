@@ -1,4 +1,4 @@
-package edu.uwp.kusd;
+package edu.uwp.kusd.xmlParser;
 
 /**
  * Created by Christian on 1/12/2016.
@@ -16,13 +16,13 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import edu.uwp.kusd.lunch.LunchObj;
 
 
 /**
  * A class to parse XML for events.
  */
-public class LunchParserHandler {
+public class LunchXMLParser {
 
     /**
      * An input stream used to parse the XML from a string.
@@ -46,7 +46,7 @@ public class LunchParserHandler {
      *
      * @param xmlData string of XML data
      */
-    public LunchParserHandler(String xmlData) {
+    public LunchXMLParser(String xmlData) {
         try {
             xml = xmlData;
             xmlInputStream = new ByteArrayInputStream(xmlData.getBytes("UTF-8"));
@@ -69,6 +69,9 @@ public class LunchParserHandler {
         //Parse each event node
         List<LunchObj> lunches = new ArrayList<>();
         while (parser.next() != XmlPullParser.END_TAG) {
+            String temp = parser.getName();
+            int test = XmlPullParser.END_TAG;
+            int test1 = XmlPullParser.START_TAG;
             if (parser.getEventType() != XmlPullParser.START_TAG) {
                 continue;
             }
@@ -91,6 +94,7 @@ public class LunchParserHandler {
         String title = null;
         String file = null;
         String category = null;
+        String weight = null ;
 
         while (parser.next() != XmlPullParser.END_TAG) {
             if (parser.getEventType() != XmlPullParser.START_TAG) {
@@ -104,6 +108,8 @@ public class LunchParserHandler {
                file = readFile();
             }else if(name.equals("category")){
                 category = readCategory();
+            }else if(name.equals("weight")){
+                weight = readWeight();
             }
         }
         return new LunchObj(title, file, category);
@@ -136,6 +142,14 @@ public class LunchParserHandler {
         parser.require(XmlPullParser.END_TAG, null, "category");
         return details;
     }
+
+    private String readWeight() throws IOException, XmlPullParserException {
+        parser.require(XmlPullParser.START_TAG, null, "weight");
+        String details = readText();
+        parser.require(XmlPullParser.END_TAG, null, "weight");
+        return details;
+    }
+
 
     /**
      * Helper method to read the text contained in a tag.

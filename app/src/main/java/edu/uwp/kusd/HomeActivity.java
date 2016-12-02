@@ -13,6 +13,7 @@ import edu.uwp.kusd.homepage.AppSection;
 import edu.uwp.kusd.News.NewsActivity;
 import edu.uwp.kusd.homepage.HomeActivityRVAdapter;
 import edu.uwp.kusd.homepage.NoScrollGridLayoutManager;
+import edu.uwp.kusd.lunch.LunchActivity;
 import edu.uwp.kusd.textAlerts.TextAlertActivity;
 
 public class HomeActivity extends AppCompatActivity {

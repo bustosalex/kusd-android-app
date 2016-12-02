@@ -35,7 +35,7 @@
             android:theme="@style/AppThemeNoActionBar"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".LunchActivity"
+        <activity android:name=".lunch.LunchActivity"
             android:parentActivityName=".homepage.HomeActivity"
             android:theme="@style/AppThemeNoActionBar"/>
         <activity android:name=".SchoolsActivity" />
