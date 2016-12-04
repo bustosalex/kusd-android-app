@@ -7,31 +7,22 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import java.io.ByteArrayInputStream;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 
-import android.os.Bundle;
-import android.app.Activity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 
 import edu.uwp.kusd.R;
-import edu.uwp.kusd.network.CacheStringRequest;
 import edu.uwp.kusd.network.VolleySingleton;
 
 public class NewsActivity extends AppCompatActivity {
@@ -64,7 +55,7 @@ public class NewsActivity extends AppCompatActivity {
         requestQueue = VolleySingleton.getsInstance().getRequestQueue();
 
 
-        CacheStringRequest stringRequest = new CacheStringRequest(Request.Method.GET, NEWS_URL, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, NEWS_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 List<NewsItems> newsItems = null;

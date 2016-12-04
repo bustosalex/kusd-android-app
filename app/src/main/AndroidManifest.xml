@@ -2,12 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.uwp.kusd">
     <uses-permission android:name="android.permission.INTERNET"/>
-
-
-    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGEEAD"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <supports-screens android:normalScreens="true"
+                      android:largeScreens="true"
+                      android:xlargeScreens="true"
+        android:smallScreens="false"
+        android:requiresSmallestWidthDp="320"/>
 
     <application
         android:allowBackup="true"
@@ -16,17 +19,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name=".network.VolleyApplication">
-
         <activity android:name=".homepage.HomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".News.NewsActivity"
             android:parentActivityName=".homepage.HomeActivity"
             android:theme="@style/AppThemeNoActionBar"/>
@@ -34,18 +34,28 @@
             android:parentActivityName=".homepage.HomeActivity"
             android:theme="@style/AppThemeNoActionBar"
             android:screenOrientation="portrait"/>
-
         <activity android:name=".LunchActivity"
             android:parentActivityName=".homepage.HomeActivity"
             android:theme="@style/AppThemeNoActionBar"/>
-        <activity android:name=".SchoolsActivity" />
-        <activity android:name=".SocialMediaActivity" />
-        <activity android:name=".FeaturesActivity" />
-        <activity android:name=".textAlerts.TextAlertActivity" />
-
-        <activity android:name=".News.NewsDetails"></activity>
-
-
+        <activity android:name=".SchoolsActivity"
+            android:parentActivityName=".homepage.HomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"/>
+        <activity android:name=".SocialMediaActivity"
+            android:parentActivityName=".homepage.HomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"/>
+        <activity android:name=".FeaturesActivity"
+            android:parentActivityName=".homepage.HomeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".textAlerts.TextAlertActivity"
+            android:parentActivityName=".homepage.HomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"/>
+        <activity android:name=".News.NewsDetails"
+            android:parentActivityName=".News.NewsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"/>
         <activity android:name=".boardMembers.BoardMembersActivity"
                   android:parentActivityName=".homepage.HomeActivity"
                   android:screenOrientation="portrait"

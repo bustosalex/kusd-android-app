@@ -3,20 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_text_alert"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="4dp"
-    >
+    android:layout_height="match_parent">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimary"
+        android:elevation="6dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-
-
-
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        android:layout_below="@id/toolbar">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="normal"
-        android:text="To receive district-wide text alerts concerning emergencies and school closings, please enter your name and mobile number in the boxes below. Once you submit the form, you will receive a text within 24-48 hours from the sender 684-53 asking if you want to receive text messages from Kenosha Unified School District. You MUST respond Y to this message to be fully registered.."
+        android:text="To receive district-wide text alerts concerning emergencies and school closings, please enter your name and mobile number in the boxes below. Once you submit the form, you will receive a text within 24-48 hours from the sender 684-53 asking if you want to receive text messages from Kenosha Unified School District. You MUST respond Y to this message to be fully registered."
         android:id="@+id/termsText"
         android:gravity="center"
 
@@ -69,5 +79,7 @@
         android:id="@+id/ratesText"
         android:layout_below="@id/submitButton"
         android:gravity="center" />
+
+    </RelativeLayout>
 
 </RelativeLayout>

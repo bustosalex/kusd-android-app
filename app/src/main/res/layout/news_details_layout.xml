@@ -1,57 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true">
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/news_details_layout"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context="edu.uwp.kusd.News.NewsDetails"
-        android:orientation="vertical"
-        android:weightSum="1">
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:elevation="6dp"
+        android:minHeight="?attr/actionBarSize"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
-        <TextView
-            android:text="Title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/news_header"
-            android:textStyle="bold"
-            android:gravity="left"
-            android:layout_weight="0.05"
-            android:textSize="25sp"
-            android:paddingBottom="15dp"
-            android:textColor="#9E8458"
-            />
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                      xmlns:tools="http://schemas.android.com/tools"
+                      android:id="@+id/news_details_layout"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:orientation="vertical"
+                      android:paddingBottom="@dimen/activity_vertical_margin"
+                      android:paddingLeft="@dimen/activity_horizontal_margin"
+                      android:paddingRight="@dimen/activity_horizontal_margin"
+                      android:paddingTop="@dimen/activity_vertical_margin"
+                      android:weightSum="1"
+                      tools:context="edu.uwp.kusd.News.NewsDetails">
+
+            <TextView
+                android:id="@+id/news_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.05"
+                android:gravity="left"
+                android:paddingBottom="15dp"
+                android:text="Title"
+                android:textColor="#9E8458"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                />
 
 
-        <TextView
-            android:text="news"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/news_time"
-            android:textStyle="bold"
-            android:gravity="left"
-            android:layout_weight="0.05"
-            android:textSize="15sp"
-            android:textColor="#adafac"
-            />
+            <TextView
+                android:id="@+id/news_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.05"
+                android:gravity="left"
+                android:text="news"
+                android:textColor="#adafac"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                />
 
-        <TextView
-            android:paddingTop="15dp"
-            android:text="news"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/news_fulldesc"
-            android:gravity="left"
-            android:layout_weight="0.05"
-            android:textSize="15sp"
-            android:textColor="#020202"
-            />
-    </LinearLayout>
-</ScrollView>
+            <TextView
+                android:id="@+id/news_fulldesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.05"
+                android:gravity="left"
+                android:paddingTop="15dp"
+                android:text="news"
+                android:textColor="#020202"
+                android:textSize="15sp"
+                />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

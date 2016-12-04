@@ -1,6 +1,9 @@
 package edu.uwp.kusd.homepage;
 
 import android.content.Intent;
+import android.media.Image;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -52,6 +55,8 @@ public class HomeActivity extends AppCompatActivity {
 
     private static final String HIGHLIGHTS_URL = "http://www.kusd.edu/xml-highlights";
 
+    private ImageView mNoNetworkImage;
+
     RequestQueue requestQueue = VolleySingleton.getsInstance().getRequestQueue();
 
     @Override
@@ -61,10 +66,11 @@ public class HomeActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        TextView toolbarText = (TextView) findViewById(R.id.toolbarText);
-        toolbarText.setText("Kenosha Unified School District");
+       // TextView toolbarText = (TextView) findViewById(R.id.toolbarText);
+       // toolbarText.setText("Kenosha Unified School District");
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
+
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, HIGHLIGHTS_URL, new Response.Listener<String>() {
             @Override
@@ -88,6 +94,7 @@ public class HomeActivity extends AppCompatActivity {
 
                 } catch (IOException | XmlPullParserException | ParseException e) {
                     e.printStackTrace();
+                    displayError();
                 }
             }
         }, new Response.ErrorListener() {
@@ -96,26 +103,32 @@ public class HomeActivity extends AppCompatActivity {
                 error.printStackTrace();
             }
         });
-        requestQueue.add(stringRequest);
+
+
+        if (isNetworkAvailable()) {
+            requestQueue.add(stringRequest);
+        } else {
+            displayError();
+        }
 
         List<AppSection> appSections = new ArrayList<>();
-        AppSection news = new AppSection(R.drawable.ic_newspaper_black_36dp, NewsActivity.class, "News");
+        AppSection news = new AppSection(R.drawable.newspaper_blue, NewsActivity.class, "News");
         appSections.add(news);
-        AppSection calendar = new AppSection(R.drawable.ic_calendar_black_36dp, CalendarActivity.class, "Calendars");
+        AppSection calendar = new AppSection(R.drawable.calendar_blue, CalendarActivity.class, "Calendars");
         appSections.add(calendar);
-        AppSection lunch = new AppSection(R.drawable.ic_food_apple_black_36dp, LunchActivity.class, "Lunch Menus");
+        AppSection lunch = new AppSection(R.drawable.food_blue, LunchActivity.class, "Lunch Menus");
         appSections.add(lunch);
-        AppSection schools = new AppSection(R.drawable.ic_school_black_36dp, SchoolsActivity.class, "School List");
+        AppSection schools = new AppSection(R.drawable.school_blue, SchoolsActivity.class, "School List");
         appSections.add(schools);
-        AppSection socialMedia = new AppSection(R.drawable.ic_facebook_box_black_36dp, SocialMediaActivity.class, "Social Media");
+        AppSection socialMedia = new AppSection(R.drawable.social_media_blue, SocialMediaActivity.class, "Social Media");
         appSections.add(socialMedia);
-        AppSection features = new AppSection(R.drawable.ic_star_black_36dp, FeaturesActivity.class, "Features");
+        AppSection features = new AppSection(R.drawable.star_blue, FeaturesActivity.class, "Features");
         appSections.add(features);
-        AppSection textAlert = new AppSection(R.drawable.ic_message_reply_text_black_36dp, TextAlertActivity.class, "Text Alerts");
+        AppSection textAlert = new AppSection(R.drawable.message_reply_text_blue, TextAlertActivity.class, "Text Alerts");
         appSections.add(textAlert);
-        AppSection boardMembers = new AppSection(R.drawable.ic_bank_black_36dp, BoardMembersActivity.class, "Board Members");
+        AppSection boardMembers = new AppSection(R.drawable.bank_blue, BoardMembersActivity.class, "Board Members");
         appSections.add(boardMembers);
-        AppSection infiniteCampus = new AppSection(R.drawable.ic_infinity_black_36dp, InfiniteCampusActivity.class, "Infinite Campus");
+        AppSection infiniteCampus = new AppSection(R.drawable.infinity_blue_square, InfiniteCampusActivity.class, "Infinite Campus");
         appSections.add(infiniteCampus);
 
         recyclerView = (RecyclerView) findViewById(R.id.home_activty_icon_grid);
@@ -142,5 +155,18 @@ public class HomeActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    private void displayError() {
+        mViewFlipper = (ViewFlipper) findViewById(R.id.flipper);
+        mViewFlipper.setVisibility(View.GONE);
+        mNoNetworkImage = (ImageView) findViewById(R.id.no_network_image);
+        mNoNetworkImage.setVisibility(View.VISIBLE);
     }
 }

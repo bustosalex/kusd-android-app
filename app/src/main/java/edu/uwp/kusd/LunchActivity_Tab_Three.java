@@ -12,6 +12,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -19,7 +20,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.uwp.kusd.network.CacheStringRequest;
 import edu.uwp.kusd.network.VolleySingleton;
 
 
@@ -54,7 +54,7 @@ public class LunchActivity_Tab_Three extends Fragment {
         recyclerview = (RecyclerView) view.findViewById(R.id.recyclerview);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerview.setLayoutManager(layoutManager);
-        CacheStringRequest stringRequest = new CacheStringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 

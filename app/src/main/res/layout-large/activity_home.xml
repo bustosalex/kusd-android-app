@@ -11,14 +11,14 @@
     <ViewFlipper
         android:id="@+id/flipper"
         android:layout_width="match_parent"
-        android:layout_height="175dp"
+        android:layout_height="275dp"
         android:layout_gravity="fill_horizontal"
         android:measureAllChildren="false"/>
 
     <ImageView
         android:id="@+id/no_network_image"
         android:layout_width="match_parent"
-        android:layout_height="175dp"
+        android:layout_height="275dp"
         android:src="@drawable/lgo_bw"
         android:background="@color/colorAccent"
         android:padding="24dp"

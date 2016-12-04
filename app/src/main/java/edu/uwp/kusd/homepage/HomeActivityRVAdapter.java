@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -30,12 +31,15 @@ public class HomeActivityRVAdapter extends RecyclerView.Adapter<HomeActivityRVAd
 
     public class HomeActivityViewHolder extends RecyclerView.ViewHolder {
 
+        private RelativeLayout mRelativeLayout;
+
         private ImageButton mIcon;
 
         private TextView mSectionName;
 
         public HomeActivityViewHolder(View itemView) {
             super(itemView);
+            mRelativeLayout = (RelativeLayout) itemView.findViewById(R.id.clickable_section);
             mIcon = (ImageButton) itemView.findViewById(R.id.app_section_icon_image);
             mSectionName = (TextView) itemView.findViewById(R.id.app_section_name);
         }

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/activity_social_media"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                tools:context="edu.uwp.kusd.SocialMediaActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:elevation="6dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin">
+
+        <ImageView
+            android:id="@+id/facebook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:clickable="true"
+            android:src="@drawable/facebook"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="40dp"
+            />
+
+        <ImageView
+            android:id="@+id/twitter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/facebook"
+            android:layout_centerHorizontal="true"
+            android:clickable="true"
+            android:src="@drawable/twitter"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            />
+
+        <ImageView
+            android:id="@+id/youtube"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/twitter"
+            android:layout_centerHorizontal="true"
+            android:clickable="true"
+            android:src="@drawable/youtube"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            />
+
+        <ImageView
+            android:id="@+id/instagram"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/youtube"
+            android:layout_centerHorizontal="true"
+            android:clickable="true"
+            android:src="@drawable/instagram"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>
