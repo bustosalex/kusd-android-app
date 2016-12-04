@@ -72,7 +72,6 @@ public class HighFragment extends Fragment {
                 new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-
         //Request XML from KUSD
         RequestQueue requestQueue = VolleySingleton.getsInstance().getRequestQueue();
         StringRequest stringRequest = new StringRequest(Request.Method.GET, SCHOOL_LIST_URL, new Response.Listener<String>() {
@@ -84,9 +83,6 @@ public class HighFragment extends Fragment {
                 rv = (RecyclerView) rootView.findViewById(R.id.rvH);
                 rv.setLayoutManager(new LinearLayoutManager(getActivity()));
                 rv.setHasFixedSize(true);
-                rv.setItemViewCacheSize(24);
-                rv.setDrawingCacheEnabled(true);
-                rv.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
 
 
                 try {

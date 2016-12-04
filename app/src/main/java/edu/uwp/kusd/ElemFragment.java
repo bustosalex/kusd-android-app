@@ -80,9 +80,6 @@ public class ElemFragment extends Fragment {
                 rv = (RecyclerView) rootView.findViewById(R.id.rvE);
                 rv.setLayoutManager(new LinearLayoutManager(getActivity()));
                 rv.setHasFixedSize(true);
-                rv.setItemViewCacheSize(24); //maximum amount of images for the schools
-                rv.setDrawingCacheEnabled(true);
-                rv.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
 
 
                 try {

@@ -72,9 +72,6 @@ public class CharterFragment extends Fragment {
                 rv = (RecyclerView) rootView.findViewById(R.id.rvC);
                 rv.setLayoutManager(new LinearLayoutManager(getActivity()));
                 rv.setHasFixedSize(true);
-                rv.setItemViewCacheSize(24);
-                rv.setDrawingCacheEnabled(true);
-                rv.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
 
                 try {
                     //Parse the schools into a list

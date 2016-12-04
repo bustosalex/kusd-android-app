@@ -19,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.bumptech.glide.Glide;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -106,8 +108,10 @@ public class SRVAdapter extends RecyclerView.Adapter<SRVAdapter.SchoolViewHolder
 
         //converts each image
         //URL into a bitmap image and sets the image
-        Bitmap b = getBitmapFromURL(schools.get(i).image);
-        schoolViewHolder.image.setImageBitmap(b);
+        //Bitmap b = getBitmapFromURL(schools.get(i).image);
+        //schoolViewHolder.image.setImageBitmap(b);
+
+        Glide.with(context).load(schools.get(i).image).centerCrop().into(schoolViewHolder.image);
 
 
     }
