@@ -51,7 +51,7 @@ public class FeaturesFragment extends Fragment {
 
 
 
-
+        //Requests and parses the features url
         StringRequest stringRequest = new StringRequest(Request.Method.GET, FEATURES_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

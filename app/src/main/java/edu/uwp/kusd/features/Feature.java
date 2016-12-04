@@ -4,6 +4,7 @@ package edu.uwp.kusd.features;
  * Created by Cabz on 12/1/2016.
  */
 
+//Feature Object Class
 public class Feature {
 
     private String imageURL;

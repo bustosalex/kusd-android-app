@@ -29,6 +29,7 @@ public class FeaturesPagerAdapter extends PagerAdapter {
 
     private Context mContext;
 
+    //List of features to make a fragment off
     FeaturesPagerAdapter(Context context, List<Feature> featureList) {
         this.mContext = context;
         this.mFeatures = featureList;
@@ -44,6 +45,7 @@ public class FeaturesPagerAdapter extends PagerAdapter {
         return view == ((ImageView) object);
     }
 
+    //Downloads image from websitem and sets a click listener to open the link
     @Override
     public Object instantiateItem(ViewGroup container, final int position) {
         ImageView imageView = new ImageView(mContext);
