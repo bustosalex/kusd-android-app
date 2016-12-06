@@ -22,7 +22,6 @@
             android:src="@drawable/lgo_bw"
             android:scaleType="centerInside"
             android:layout_centerVertical="true"/>
-
         <TextView
             android:id="@+id/toolbarText"
             android:layout_width="wrap_content"

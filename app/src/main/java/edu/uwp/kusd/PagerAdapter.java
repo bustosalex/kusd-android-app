@@ -4,6 +4,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import edu.uwp.kusd.schools.CharterFragment;
+import edu.uwp.kusd.schools.ElemFragment;
+import edu.uwp.kusd.schools.HighFragment;
+import edu.uwp.kusd.schools.MiddleFragment;
+
 public class PagerAdapter extends FragmentStatePagerAdapter {
     int mNumOfTabs;
 

@@ -107,11 +107,4 @@ public class LunchActivity_Tab_One extends Fragment {
 
         return view;
     }
-
-
-
-
-
-
-
 }
