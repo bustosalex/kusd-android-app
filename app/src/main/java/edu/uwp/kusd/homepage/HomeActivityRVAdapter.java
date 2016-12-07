@@ -39,6 +39,7 @@ public class HomeActivityRVAdapter extends RecyclerView.Adapter<HomeActivityRVAd
 
         public HomeActivityViewHolder(View itemView) {
             super(itemView);
+
             mRelativeLayout = (RelativeLayout) itemView.findViewById(R.id.clickable_section);
             mIcon = (ImageButton) itemView.findViewById(R.id.app_section_icon_image);
             mSectionName = (TextView) itemView.findViewById(R.id.app_section_name);

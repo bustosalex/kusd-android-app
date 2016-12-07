@@ -37,7 +37,7 @@ import edu.uwp.kusd.InfiniteCampusActivity;
 import edu.uwp.kusd.LunchActivity;
 import edu.uwp.kusd.News.NewsActivity;
 import edu.uwp.kusd.R;
-import edu.uwp.kusd.SchoolsActivity;
+import edu.uwp.kusd.schools.SchoolsActivity;
 import edu.uwp.kusd.SocialMediaActivity;
 import edu.uwp.kusd.textAlerts.TextAlertActivity;
 import edu.uwp.kusd.boardMembers.BoardMembersActivity;
@@ -70,7 +70,6 @@ public class HomeActivity extends AppCompatActivity {
        // toolbarText.setText("Kenosha Unified School District");
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
-
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, HIGHLIGHTS_URL, new Response.Listener<String>() {
             @Override
@@ -129,6 +128,7 @@ public class HomeActivity extends AppCompatActivity {
         AppSection boardMembers = new AppSection(R.drawable.bank_blue, BoardMembersActivity.class, "Board Members");
         appSections.add(boardMembers);
         AppSection infiniteCampus = new AppSection(R.drawable.infinity_blue_square, InfiniteCampusActivity.class, "Infinite Campus");
+
         appSections.add(infiniteCampus);
 
         recyclerView = (RecyclerView) findViewById(R.id.home_activty_icon_grid);

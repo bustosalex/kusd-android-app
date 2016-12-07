@@ -54,7 +54,6 @@ public class NewsActivity extends AppCompatActivity {
 
         requestQueue = VolleySingleton.getsInstance().getRequestQueue();
 
-
         StringRequest stringRequest = new StringRequest(Request.Method.GET, NEWS_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
