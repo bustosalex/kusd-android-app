@@ -210,7 +210,7 @@ public class PdfCalendarsFragment extends Fragment {
         query.equalTo("mClassTag", "Pdf Calendars");
         RealmResults<RefreshObject> results = query.findAll();
         if (results.size() > 0) {
-            if (System.currentTimeMillis() - results.get(0).getRefreshTime() > 1 * 1 * 1000) {
+            if (System.currentTimeMillis() - results.get(0).getRefreshTime() > 7 * 24 * 60 * 60 * 1000) {
                 mRefreshNeeded = true;
             }
         }
