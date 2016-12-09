@@ -23,12 +23,25 @@ import edu.uwp.kusd.boardMembers.BoardMember;
 
 public class BoardMemberXmlParser {
 
+    /**
+     * Used in parsing the XML.
+     */
     private XmlPullParser mParser;
 
+    /**
+     * Used in parsing the XML.
+     */
     private XmlPullParserFactory mXmlPullParserFactory;
 
+    /**
+     * An input stream used to parse the XML from a string.
+     */
     private InputStream mXmlInputStream;
 
+    /**
+     * Constructs a BoardMemberXmlParser
+     * @param xmlData
+     */
     public BoardMemberXmlParser(String xmlData) {
         try {
             mXmlInputStream = new ByteArrayInputStream(xmlData.getBytes("UTF-8"));
@@ -40,6 +53,14 @@ public class BoardMemberXmlParser {
         }
     }
 
+    /**
+     * Parses all of the board members from the XML and returns them as a list
+     *
+     * @return the board members as a list
+     * @throws XmlPullParserException
+     * @throws IOException
+     * @throws ParseException
+     */
     public List<BoardMember> parseBoardMembers() throws XmlPullParserException, IOException, ParseException {
         List<BoardMember> members = new ArrayList<>();
 
@@ -50,9 +71,17 @@ public class BoardMemberXmlParser {
             BoardMember tempMember = parseMember();
             members.add(tempMember);
         }
+        close();
         return members;
     }
 
+    /**
+     * Parses a single board member out of the XML
+     *
+     * @return a board member object from the XML
+     * @throws IOException
+     * @throws XmlPullParserException
+     */
     private BoardMember parseMember() throws IOException, XmlPullParserException {
         mParser.require(XmlPullParser.START_TAG, null, "node");
         String photoURL = null;
@@ -87,9 +116,16 @@ public class BoardMemberXmlParser {
                 skip();
             }
         }
-        return new BoardMember(null, photoURL, name, position, email, phone, term);
+        return new BoardMember(photoURL, name, position, email, phone, term);
     }
 
+    /**
+     * Reads the text in the photo tag
+     *
+     * @return the text in the photo tag
+     * @throws IOException
+     * @throws XmlPullParserException
+     */
     private String readPhotoURL() throws IOException, XmlPullParserException {
         mParser.require(XmlPullParser.START_TAG, null, "photo");
         String photoUrl = readText();
@@ -97,6 +133,13 @@ public class BoardMemberXmlParser {
         return photoUrl;
     }
 
+    /**
+     * Reads the text in the name tag
+     *
+     * @return the text in the name tag
+     * @throws IOException
+     * @throws XmlPullParserException
+     */
     private String readName() throws IOException, XmlPullParserException {
         mParser.require(XmlPullParser.START_TAG, null, "name");
         String name = readText();
@@ -104,6 +147,13 @@ public class BoardMemberXmlParser {
         return name;
     }
 
+    /**
+     * Reads the text in the position tag
+     *
+     * @return the text in the position tag
+     * @throws IOException
+     * @throws XmlPullParserException
+     */
     private String readPosition() throws IOException, XmlPullParserException {
         mParser.require(XmlPullParser.START_TAG, null, "position");
         String position = readText();
@@ -111,6 +161,13 @@ public class BoardMemberXmlParser {
         return position;
     }
 
+    /**
+     * Reads the text in the email tag
+     *
+     * @return the text in the email tag
+     * @throws IOException
+     * @throws XmlPullParserException
+     */
     private String readEmail() throws IOException, XmlPullParserException {
         mParser.require(XmlPullParser.START_TAG, null, "email");
         String email = readText();
@@ -118,6 +175,13 @@ public class BoardMemberXmlParser {
         return email;
     }
 
+    /**
+     * Reads the text in the phone tag
+     *
+     * @return the text in the phone tag
+     * @throws IOException
+     * @throws XmlPullParserException
+     */
     private String readPhone() throws IOException, XmlPullParserException {
         mParser.require(XmlPullParser.START_TAG, null, "phone");
         String phone = readText();
@@ -125,6 +189,13 @@ public class BoardMemberXmlParser {
         return phone;
     }
 
+    /**
+     * Reads the text in the termexpires tag
+     *
+     * @return the text in the termexpires tag
+     * @throws IOException
+     * @throws XmlPullParserException
+     */
     private Date readTerm() throws IOException, XmlPullParserException {
         mParser.require(XmlPullParser.START_TAG, null, "termexpires");
         String temp = readText();
@@ -134,6 +205,12 @@ public class BoardMemberXmlParser {
         return term;
     }
 
+    /**
+     * Skips a tag
+     *
+     * @throws XmlPullParserException
+     * @throws IOException
+     */
     private void skip() throws XmlPullParserException, IOException {
         if (mParser.getEventType() != XmlPullParser.START_TAG) {
             throw new IllegalStateException();
@@ -151,6 +228,13 @@ public class BoardMemberXmlParser {
         }
     }
 
+    /**
+     * Reads the text between the start and end tag
+     *
+     * @return the text between a start and end tag
+     * @throws IOException
+     * @throws XmlPullParserException
+     */
     private String readText() throws IOException, XmlPullParserException {
         String result = "";
         if (mParser.next() == XmlPullParser.TEXT) {
@@ -160,9 +244,14 @@ public class BoardMemberXmlParser {
         return result;
     }
 
+    /**
+     * Parses a date into yyyy-M-dd format
+     *
+     * @param input the date to parse
+     * @return a parsed date
+     */
     private Date parseDate(String input) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-M-dd", Locale.US);
-        //String[] fields = input.split("-");
         Date tempDate = null;
         try {
             tempDate = dateFormat.parse(input);
@@ -172,6 +261,9 @@ public class BoardMemberXmlParser {
         return tempDate;
     }
 
+    /**
+     * Closes the input stream
+     */
     public void close() {
         try {
             mXmlInputStream.close();

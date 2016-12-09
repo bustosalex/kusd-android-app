@@ -1,9 +1,5 @@
 package edu.uwp.kusd.xmlParser;
 
-/**
- * Created by Dakota on 11/12/2016.
- */
-
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -18,9 +14,6 @@ import java.util.List;
 
 import edu.uwp.kusd.homepage.Highlight;
 
-/**
- * A class to parse XML for events.
- */
 public class HighlightsXmlParser {
 
     /**
@@ -38,10 +31,13 @@ public class HighlightsXmlParser {
      */
     XmlPullParser parser;
 
+    /**
+     * The XML as a string
+     */
     private String xml;
 
     /**
-     * Constructs an EventXmlParser with a string of XML data as a parameter.
+     * Constructs a HighlightsXmlParser with a string of XML data as a parameter.
      *
      * @param xmlData string of XML data
      */
@@ -58,14 +54,14 @@ public class HighlightsXmlParser {
     }
 
     /**
-     * Events are contained in nodes in the XML. Parses the individual nodes for events.
+     * Highlights are contained in nodes in the XML. Parses the individual nodes for highlights.
      *
      * @throws XmlPullParserException
      * @throws IOException
      * @throws ParseException
      */
     public List<Highlight> parseNodes() throws XmlPullParserException, IOException, ParseException {
-        //Parse each event node
+        //Parse each highlight node
         List<Highlight> highlights = new ArrayList<>();
         while (parser.next() != XmlPullParser.END_TAG) {
             if (parser.getEventType() != XmlPullParser.START_TAG) {
@@ -78,9 +74,9 @@ public class HighlightsXmlParser {
     }
 
     /**
-     * Parses event data - including title, date, school, and details for the event.
+     * Parses highlight data
      *
-     * @return a new Event with the parsed data.
+     * @return a new Highlight with the parsed data.
      * @throws IOException
      * @throws XmlPullParserException
      */
@@ -111,7 +107,7 @@ public class HighlightsXmlParser {
     /**
      * Helper method to read the title of a file
      *
-     * @return the title of an event
+     * @return the title of a highlight
      * @throws IOException
      * @throws XmlPullParserException
      */
@@ -136,6 +132,13 @@ public class HighlightsXmlParser {
         return details;
     }
 
+    /**
+     * Reads the image link in the link tag
+     *
+     * @return the image link in the link tag as a string
+     * @throws IOException
+     * @throws XmlPullParserException
+     */
     private String readImageLink() throws IOException, XmlPullParserException {
         parser.require(XmlPullParser.START_TAG, null, "link");
         String details = readText();
@@ -170,6 +173,12 @@ public class HighlightsXmlParser {
         }
     }
 
+    /**
+     * Skips an XML tag
+     *
+     * @throws XmlPullParserException
+     * @throws IOException
+     */
     private void skip() throws XmlPullParserException, IOException {
         if (parser.getEventType() != XmlPullParser.START_TAG) {
             throw new IllegalStateException();

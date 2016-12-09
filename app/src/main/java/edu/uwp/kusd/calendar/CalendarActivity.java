@@ -8,8 +8,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import edu.uwp.kusd.R;
 
@@ -61,69 +59,5 @@ public class CalendarActivity extends AppCompatActivity {
 
             }
         });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * Placeholder implementation of onPause.
-     * TODO: Implement if needed.
-     */
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    /**
-     * Placeholder implementation of onStop.
-     * TODO: Implement if needed.
-     */
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
-
-    /**
-     * Placeholder implementation of onDestroy.
-     * TODO: Implement if needed.
-     */
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
-    /**
-     * Placeholder implementation of onResume.
-     * TODO: Implement if needed.
-     */
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    /**
-     * Placeholder implementation of onRestart.
-     * TODO: Implement if needed.
-     */
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-    }
-
-    /**
-     * Placeholder implementation of onStart.
-     * TODO: Implement if needed.
-     */
-    @Override
-    protected void onStart() {
-        super.onStart();
     }
 }

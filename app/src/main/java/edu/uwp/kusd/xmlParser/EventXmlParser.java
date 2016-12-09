@@ -1,10 +1,5 @@
 package edu.uwp.kusd.xmlParser;
 
-/**
- * Created by Dakota on 11/12/2016.
- */
-
-
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -21,9 +16,7 @@ import java.util.UUID;
 import edu.uwp.kusd.calendar.Event;
 import io.realm.Realm;
 
-/**
- * A class to parse XML for events.
- */
+
 public class EventXmlParser {
 
     /**
@@ -41,10 +34,19 @@ public class EventXmlParser {
      */
     private XmlPullParser parser;
 
+    /**
+     * The realm DB
+     */
     private Realm mRealm;
 
+    /**
+     * The xml input
+     */
     private String xml;
 
+    /**
+     * The duplicate dates to skip over
+     */
     private List<String> skipDates;
 
     /**
@@ -130,6 +132,7 @@ public class EventXmlParser {
             }
         }
         dateString = date;
+        //Check for events that are duplicates
         if (skipDates.contains(dateString)) {
             return;
         } else if (dateString.matches("((\\d+-\\d+-\\d+)\\s(\\d+:\\d+:\\d+),\\s)+(\\d+-\\d+-\\d+)\\s(\\d+:\\d+:\\d+){1}") || date.matches("((\\d+-\\d+-\\d+)\\s(\\d+:\\d+:\\d+)\\s(to)\\s(\\d+-\\d+-\\d+)\\s(\\d+:\\d+:\\d+),\\s)+(\\d+-\\d+-\\d+)\\s(\\d+:\\d+:\\d+)\\s(to)\\s(\\d+-\\d+-\\d+)\\s(\\d+:\\d+:\\d+)")) {
@@ -151,6 +154,14 @@ public class EventXmlParser {
         }
     }
 
+    /**
+     * Processes an event that has multiple dates.
+     *
+     * @param title the title of an event
+     * @param details the details of an event
+     * @param school the school of an event
+     * @param dateString the date string of an event
+     */
     private void processMultipleDates(String title, String details, String school, String dateString) {
         String[] dates = dateString.split(",\\s");
         for (String date : dates) {
@@ -255,6 +266,12 @@ public class EventXmlParser {
         }
     }
 
+    /**
+     * Skips a tag
+     *
+     * @throws XmlPullParserException
+     * @throws IOException
+     */
     private void skip() throws XmlPullParserException, IOException {
         if (parser.getEventType() != XmlPullParser.START_TAG) {
             throw new IllegalStateException();

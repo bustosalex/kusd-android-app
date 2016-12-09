@@ -20,10 +20,22 @@ import edu.uwp.kusd.R;
 
 public class HomeActivityRVAdapter extends RecyclerView.Adapter<HomeActivityRVAdapter.HomeActivityViewHolder> {
 
+    /**
+     * The list of sections in the app
+     */
     private List<AppSection> mAppSectionList;
 
+    /**
+     * The context for the adapter
+     */
     private Context context;
 
+    /**
+     * Constructs a HomeActivityRVAdapter
+     *
+     * @param appSectionsList the list of sections in the app
+     * @param context the context
+     */
     public HomeActivityRVAdapter(List<AppSection> appSectionsList, Context context) {
         this.context = context;
         this.mAppSectionList = appSectionsList;
@@ -31,30 +43,53 @@ public class HomeActivityRVAdapter extends RecyclerView.Adapter<HomeActivityRVAd
 
     public class HomeActivityViewHolder extends RecyclerView.ViewHolder {
 
-        private RelativeLayout mRelativeLayout;
-
+        /**
+         * The image button for the section
+         */
         private ImageButton mIcon;
 
+        /**
+         * The textview for the name of the section
+         */
         private TextView mSectionName;
 
+        /**
+         * Binds an app section to a view
+         *
+         * @param itemView the view to bind
+         */
         public HomeActivityViewHolder(View itemView) {
             super(itemView);
-            mRelativeLayout = (RelativeLayout) itemView.findViewById(R.id.clickable_section);
             mIcon = (ImageButton) itemView.findViewById(R.id.app_section_icon_image);
             mSectionName = (TextView) itemView.findViewById(R.id.app_section_name);
         }
     }
 
+    /**
+     * Handles actions to perform when a viewholder is created
+     *
+     * @param parent the parent viewgroup
+     * @param viewType the view type
+     * @return A board member viewholder
+     */
     @Override
     public HomeActivityViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.app_section, parent, false);
         return new HomeActivityViewHolder(view);
     }
 
+    /**
+     * Handles actions to perform when a board member is bound to a view
+     *
+     * @param holder the view holder
+     * @param position the position to bind at
+     */
     @Override
     public void onBindViewHolder(final HomeActivityViewHolder holder, final int position) {
         holder.mIcon.setBackground(context.getDrawable(mAppSectionList.get(position).getIcon()));
         holder.mSectionName.setText(mAppSectionList.get(position).getSectionName());
+
+        //Sets up the infinite campus section and the rest of the other section buttons' click listeners
         holder.mIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,11 +115,22 @@ public class HomeActivityRVAdapter extends RecyclerView.Adapter<HomeActivityRVAd
         });
     }
 
+    /**
+     * Gets the count of the app sections
+     *
+     * @return the count of the app sections
+     */
     @Override
     public int getItemCount() {
         return mAppSectionList.size();
     }
 
+    /**
+     * Checks if an app is installed
+     *
+     * @param uri the url for the app
+     * @return a boolean for if the app is installed
+     */
     private boolean isAppInstalled(String uri) {
         PackageManager pm = context.getPackageManager();
         boolean app_installed;

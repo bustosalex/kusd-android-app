@@ -17,6 +17,9 @@ public class PdfCalendar extends RealmObject {
      */
     private String mFileURL;
 
+    /**
+     * Default constructor for a PdfCalendar
+     */
     public PdfCalendar() {
     }
 
@@ -31,18 +34,38 @@ public class PdfCalendar extends RealmObject {
         this.mFileURL = fileURL;
     }
 
+    /**
+     * Gets the title of a file for a pdf
+     *
+     * @return the title of a pdf
+     */
     public String getFileTitle() {
         return mFileTitle;
     }
 
+    /**
+     * Sets the title of a file for a pdf
+     *
+     * @param fileTitle the title of a pdf
+     */
     public void setFileTitle(String fileTitle) {
         mFileTitle = fileTitle;
     }
 
+    /**
+     * Gets the file url of a pdf
+     *
+     * @return the file url of a pdf
+     */
     public String getFileURL() {
         return mFileURL;
     }
 
+    /**
+     * Sets the file url for a pdf
+     *
+     * @param fileURL the file url for a pdf
+     */
     public void setFileURL(String fileURL) {
         mFileURL = fileURL;
     }

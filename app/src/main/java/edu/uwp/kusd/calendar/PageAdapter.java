@@ -6,9 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import edu.uwp.kusd.calendar.EventsFragment;
-import edu.uwp.kusd.calendar.PdfCalendarsFragment;
-
 /**
  * A class for an adapter for the TabLayout.
  */
@@ -22,7 +19,7 @@ public class PageAdapter extends FragmentStatePagerAdapter {
     /**
      * Constructs a PageAdapter for the TabLayout.
      *
-     * @param fm fragment manager
+     * @param fm         fragment manager
      * @param mNumOfTabs number of tabs
      */
     public PageAdapter(FragmentManager fm, int mNumOfTabs) {

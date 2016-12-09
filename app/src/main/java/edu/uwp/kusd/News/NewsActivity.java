@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import java.io.ByteArrayInputStream;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+
+import org.xmlpull.v1.XmlPullParserException;
 
 import edu.uwp.kusd.R;
 import edu.uwp.kusd.network.VolleySingleton;
@@ -61,11 +64,13 @@ public class NewsActivity extends AppCompatActivity {
                 List<NewsItems> newsItems = null;
 
                 try {
-                    NewsRead parser = new NewsRead();
+                    //NewsRead parser = new NewsRead();
 
                     //parse news items into news items list
-                    InputStream xmlInputStream = new ByteArrayInputStream(response.getBytes("UTF-8"));
-                    newsItems = parser.parse(xmlInputStream);
+                   // InputStream xmlInputStream = new ByteArrayInputStream(response.getBytes("UTF-8"));
+                    //newsItems = parser.parse(xmlInputStream);
+                    NewsXmlParser parser = new NewsXmlParser(response);
+                    newsItems = parser.parseNodes();
 
 
                     recyclerview = (RecyclerView) findViewById(R.id.recyclerview);
@@ -78,7 +83,7 @@ public class NewsActivity extends AppCompatActivity {
 
 
 
-                } catch (IOException e) {e.printStackTrace();}
+                } catch (IOException | XmlPullParserException | ParseException e) {e.printStackTrace();}
 
 
             }}, new Response.ErrorListener() {

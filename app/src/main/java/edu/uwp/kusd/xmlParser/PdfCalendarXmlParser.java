@@ -1,9 +1,5 @@
 package edu.uwp.kusd.xmlParser;
 
-/**
- * Created by Dakota on 11/12/2016.
- */
-
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -19,9 +15,6 @@ import java.util.List;
 import edu.uwp.kusd.calendar.PdfCalendar;
 import io.realm.Realm;
 
-/**
- * A class to parse XML for events.
- */
 public class PdfCalendarXmlParser {
 
     /**
@@ -32,28 +25,31 @@ public class PdfCalendarXmlParser {
     /**
      * Used in parsing the XML.
      */
-    XmlPullParserFactory xmlPullParserFactory;
+    private XmlPullParserFactory xmlPullParserFactory;
 
     /**
      * Used in parsing the XML.
      */
-    XmlPullParser parser;
-
-    Realm mRealm;
-
-    private String xml;
-
-    private List<String> skipDates;
+    private XmlPullParser parser;
 
     /**
-     * Constructs an EventXmlParser with a string of XML data as a parameter.
+     * A realm for storing PDF Calendars in the DB
+     */
+    private Realm mRealm;
+
+    /**
+     * The xml as a string
+     */
+    private String xml;
+
+    /**
+     * Constructs a PdfCalendarXmlParser with a string of XML data as a parameter.
      *
      * @param xmlData string of XML data
      */
     public PdfCalendarXmlParser(String xmlData) {
         try {
             mRealm = Realm.getDefaultInstance();
-            skipDates = new ArrayList<>();
             xml = xmlData;
             xmlInputStream = new ByteArrayInputStream(xmlData.getBytes("UTF-8"));
             xmlPullParserFactory = XmlPullParserFactory.newInstance();
@@ -65,14 +61,13 @@ public class PdfCalendarXmlParser {
     }
 
     /**
-     * Events are contained in nodes in the XML. Parses the individual nodes for events.
+     * PdfCalendars are contained in nodes in the XML. Parses the individual nodes for PdfCalendars.
      *
      * @throws XmlPullParserException
      * @throws IOException
      * @throws ParseException
      */
     public void parseNodes() throws XmlPullParserException, IOException, ParseException {
-        //Parse each event node
         while (parser.next() != XmlPullParser.END_TAG) {
             if (parser.getEventType() != XmlPullParser.START_TAG) {
                 continue;
@@ -84,9 +79,8 @@ public class PdfCalendarXmlParser {
     }
 
     /**
-     * Parses event data - including title, date, school, and details for the event.
+     * Parses PDFCalendar data
      *
-     * @return a new Event with the parsed data.
      * @throws IOException
      * @throws XmlPullParserException
      */
@@ -118,7 +112,7 @@ public class PdfCalendarXmlParser {
     /**
      * Helper method to read the title of a file
      *
-     * @return the title of an event
+     * @return the title of a pdf
      * @throws IOException
      * @throws XmlPullParserException
      */
@@ -132,7 +126,7 @@ public class PdfCalendarXmlParser {
     /**
      * Helper method to read the URL of a file.
      *
-     * @return the details of an event
+     * @return the url of a pdf
      * @throws IOException
      * @throws XmlPullParserException
      */
@@ -170,6 +164,12 @@ public class PdfCalendarXmlParser {
         }
     }
 
+    /**
+     * Skips a xml tag
+     *
+     * @throws XmlPullParserException
+     * @throws IOException
+     */
     private void skip() throws XmlPullParserException, IOException {
         if (parser.getEventType() != XmlPullParser.START_TAG) {
             throw new IllegalStateException();

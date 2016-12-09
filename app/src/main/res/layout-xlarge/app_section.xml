@@ -12,8 +12,8 @@
             android:layout_marginBottom="40dp">
 
                 <ImageButton
-                    android:layout_width="80dp"
-                    android:layout_height="75dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/app_section_icon_image"
                     android:layout_marginBottom="4dp"
                     android:layout_marginTop="40dp"
@@ -27,7 +27,7 @@
                     android:layout_height="wrap_content"
                     tools:text="App Section"
                     android:layout_below="@id/app_section_icon_image"
-                    android:textSize="24sp"
+                    android:textSize="20sp"
                     android:layout_centerHorizontal="true"
                     android:maxLines="1"/>
 

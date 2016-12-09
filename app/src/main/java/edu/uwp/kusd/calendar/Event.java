@@ -14,19 +14,28 @@ import io.realm.RealmObject;
 public class Event extends RealmObject implements Serializable {
 
     /**
-     * Id of an event/
+     * Id of an event
      */
     private String mId;
 
     /**
-     * The title of an event.
+     * The title of an event
      */
     private String mEventTitle;
 
+    /**
+     * The year of an event
+     */
     private String mYear;
 
+    /**
+     * The month of an event
+     */
     private String mMonth;
 
+    /**
+     * The day of an event
+     */
     private String mDay;
 
     /**
@@ -39,6 +48,9 @@ public class Event extends RealmObject implements Serializable {
      */
     private String mDetails;
 
+    /**
+     * Default constructor for an event
+     */
     public Event() {
     }
 
@@ -59,6 +71,11 @@ public class Event extends RealmObject implements Serializable {
         this.mDay = day;
     }
 
+    /**
+     * Gets the id of an event
+     *
+     * @return the id of an event
+     */
     public String getId() {
         return mId;
     }
@@ -90,42 +107,92 @@ public class Event extends RealmObject implements Serializable {
         return mDetails;
     }
 
+    /**
+     * Sets the id of an event
+     *
+     * @param id the id of an event
+     */
     public void setId(String id) {
         mId = id;
     }
 
+    /**
+     * Sets the event title of an event
+     *
+     * @param eventTitle the title of an event
+     */
     public void setEventTitle(String eventTitle) {
         mEventTitle = eventTitle;
     }
 
+    /**
+     * Sets the school of an event
+     *
+     * @param school the school of an event
+     */
     public void setSchool(String school) {
         mSchool = school;
     }
 
+    /**
+     * Sets the details of an event
+     *
+     * @param details the details of an event
+     */
     public void setDetails(String details) {
         mDetails = details;
     }
 
+    /**
+     * Gets the year of an event
+     *
+     * @return the year of an event
+     */
     public String getYear() {
         return mYear;
     }
 
+    /**
+     * Sets the year of an event
+     *
+     * @param year the year of an event
+     */
     public void setYear(String year) {
         mYear = year;
     }
 
+    /**
+     * Gets the month of an event
+     *
+     * @return the month of an event
+     */
     public String getMonth() {
         return mMonth;
     }
 
+    /**
+     * Sets the month of an event
+     *
+     * @param month the month of an event
+     */
     public void setMonth(String month) {
         mMonth = month;
     }
 
+    /**
+     * Gets the day of an event
+     *
+     * @return the event of an event
+     */
     public String getDay() {
         return mDay;
     }
 
+    /**
+     * Sets the day of an event
+     *
+     * @param day the day of and event
+     */
     public void setDay(String day) {
         mDay = day;
     }

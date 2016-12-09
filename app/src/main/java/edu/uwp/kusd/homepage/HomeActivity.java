@@ -1,7 +1,6 @@
 package edu.uwp.kusd.homepage;
 
 import android.content.Intent;
-import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -14,7 +13,6 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
@@ -37,7 +35,7 @@ import edu.uwp.kusd.InfiniteCampusActivity;
 import edu.uwp.kusd.LunchActivity;
 import edu.uwp.kusd.News.NewsActivity;
 import edu.uwp.kusd.R;
-import edu.uwp.kusd.SchoolsActivity;
+import edu.uwp.kusd.schools.SchoolsActivity;
 import edu.uwp.kusd.SocialMediaActivity;
 import edu.uwp.kusd.textAlerts.TextAlertActivity;
 import edu.uwp.kusd.boardMembers.BoardMembersActivity;
@@ -47,31 +45,48 @@ import edu.uwp.kusd.xmlParser.HighlightsXmlParser;
 
 public class HomeActivity extends AppCompatActivity {
 
+    /**
+     * The recyclerview for the app sections
+     */
     private RecyclerView recyclerView;
 
+    /**
+     * The adapter for the recyclerview
+     */
     private RecyclerView.Adapter adapter;
 
+    /**
+     * A view flipper for the image slider
+     */
     private ViewFlipper mViewFlipper;
 
+    /**
+     * The url for the highlights xml
+     */
     private static final String HIGHLIGHTS_URL = "http://www.kusd.edu/xml-highlights";
 
+    /**
+     * An image to display if there is no network connection
+     */
     private ImageView mNoNetworkImage;
 
-    RequestQueue requestQueue = VolleySingleton.getsInstance().getRequestQueue();
+    /**
+     * The request queue for making HTTP requests for the xml
+     */
+    private RequestQueue requestQueue = VolleySingleton.getsInstance().getRequestQueue();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        //Setup the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-       // TextView toolbarText = (TextView) findViewById(R.id.toolbarText);
-       // toolbarText.setText("Kenosha Unified School District");
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
 
-
+        //Make a request for the highlight xml
         StringRequest stringRequest = new StringRequest(Request.Method.GET, HIGHLIGHTS_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -79,6 +94,7 @@ public class HomeActivity extends AppCompatActivity {
                     HighlightsXmlParser parser = new HighlightsXmlParser(response);
                     List<Highlight> highlights = parser.parseNodes();
 
+                    //Setup the highlight image slider
                     mViewFlipper = (ViewFlipper) findViewById(R.id.flipper);
                     for (Highlight highlight : highlights) {
                         setFlipperImages(highlight);
@@ -111,6 +127,7 @@ public class HomeActivity extends AppCompatActivity {
             displayError();
         }
 
+        //Setup the app section buttons
         List<AppSection> appSections = new ArrayList<>();
         AppSection news = new AppSection(R.drawable.newspaper_blue, NewsActivity.class, "News");
         appSections.add(news);
@@ -139,6 +156,11 @@ public class HomeActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
+    /**
+     * Sets the images in the image slider
+     *
+     * @param highlight a highlight to set
+     */
     private void setFlipperImages(final Highlight highlight) {
         ImageView image = new ImageView(getApplicationContext());
         Animation slideIn = AnimationUtils.loadAnimation(HomeActivity.this, R.anim.slide_in);
@@ -157,12 +179,20 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Checks to see if a network connection is available
+     *
+     * @return true/false if a network connection is available
+     */
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
+    /**
+     * Displays an error message if there is no network connection
+     */
     private void displayError() {
         mViewFlipper = (ViewFlipper) findViewById(R.id.flipper);
         mViewFlipper.setVisibility(View.GONE);

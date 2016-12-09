@@ -11,14 +11,7 @@ import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
-import edu.uwp.kusd.calendar.Event;
-import io.realm.Realm;
-
-/**
- * A class to parse XML for events.
- */
 public class NewsXmlParser {
 
     /**
@@ -36,11 +29,14 @@ public class NewsXmlParser {
      */
     private XmlPullParser parser;
 
+    /**
+     * The xml as a string
+     */
     private String xml;
 
 
     /**
-     * Constructs an EventXmlParser with a string of XML data as a parameter.
+     * Constructs a NewsXmlParser with a string of XML data as a parameter.
      *
      * @param xmlData string of XML data
      */
@@ -57,14 +53,13 @@ public class NewsXmlParser {
     }
 
     /**
-     * Events are contained in nodes in the XML. Parses the individual nodes for events.
+     * NewsItems are contained in nodes in the XML. Parses the individual nodes for NewsItems.
      *
      * @throws XmlPullParserException
      * @throws IOException
      * @throws ParseException
      */
     public List<NewsItems> parseNodes() throws XmlPullParserException, IOException, ParseException {
-        //Parse each event node
         List<NewsItems> newsItems = new ArrayList<>();
         while (parser.next() != XmlPullParser.END_TAG) {
             if (parser.getEventType() != XmlPullParser.START_TAG) {
@@ -78,18 +73,17 @@ public class NewsXmlParser {
     }
 
     /**
-     * Parses event data - including title, date, school, and details for the event.
+     * Parses NewsItems data
      *
-     * @return a new Event with the parsed data.
+     * @return a new NewsItems with the parsed data.
      * @throws IOException
      * @throws XmlPullParserException
      */
     private NewsItems parseNewsItem() throws IOException, XmlPullParserException {
         parser.require(XmlPullParser.START_TAG, null, "node");
-        String title;
-        String date;
-        String desc;
-        String text;
+        String title = null;
+        String date = null;
+        String desc = null;
 
         while (parser.next() != XmlPullParser.END_TAG) {
             if (parser.getEventType() != XmlPullParser.START_TAG) {
@@ -97,26 +91,20 @@ public class NewsXmlParser {
             }
             String name = parser.getName();
             if (name.equals("title")) {
-                title = readTitle();
+                title = readTitle().replaceAll("&#039;", "'").replaceAll("&#038;", "");
             } else if (name.equals("date")) {
-                date = readSchool();
+                date = readDate();
             } else if (name.equals("story")) {
-                desc = readDetails();
-            } else if (name.equals("p")) {
-                skip();
-            } else if (name.equals("br")) {
-                skip();
-            } else if (name.equals("image")) {
-                skip();
+                desc = readStory().replaceAll("</p>", "\n").replaceAll("<[^>]+>","").replaceAll("&#039;", "'").replaceAll("&#038;", "");
             }
         }
-        return null;
+        return new NewsItems(title, date, desc);
     }
 
     /**
-     * Helper method to read the title of an event.
+     * Helper method to read the title of a NewsItem.
      *
-     * @return the title of an event
+     * @return the title of an NewsItem
      * @throws IOException
      * @throws XmlPullParserException
      */
@@ -129,13 +117,13 @@ public class NewsXmlParser {
 
 
     /**
-     * Helper method to read the school name for an event.
+     * Helper method to read the date for an NewsItem.
      *
-     * @return the name of an event
+     * @return the date of a NewsItem
      * @throws IOException
      * @throws XmlPullParserException
      */
-    private String readSchool() throws IOException, XmlPullParserException {
+    private String readDate() throws IOException, XmlPullParserException {
         parser.require(XmlPullParser.START_TAG, null, "date");
         String date = readText();
         parser.require(XmlPullParser.END_TAG, null, "date");
@@ -143,17 +131,17 @@ public class NewsXmlParser {
     }
 
     /**
-     * Helper method to read the details of an event.
+     * Helper method to read the story of a NewsItem
      *
-     * @return the details of an event
+     * @return the story of a NewsItems
      * @throws IOException
      * @throws XmlPullParserException
      */
-    private String readDetails() throws IOException, XmlPullParserException {
-        parser.require(XmlPullParser.START_TAG, null, "details");
-        String details = readText();
-        parser.require(XmlPullParser.END_TAG, null, "details");
-        return details;
+    private String readStory() throws IOException, XmlPullParserException {
+        parser.require(XmlPullParser.START_TAG, null, "story");
+        String story = readText();
+        parser.require(XmlPullParser.END_TAG, null, "story");
+        return story;
     }
 
     /**
@@ -183,6 +171,12 @@ public class NewsXmlParser {
         }
     }
 
+    /**
+     * Skips an XML tag
+     *
+     * @throws XmlPullParserException
+     * @throws IOException
+     */
     private void skip() throws XmlPullParserException, IOException {
         if (parser.getEventType() != XmlPullParser.START_TAG) {
             throw new IllegalStateException();
