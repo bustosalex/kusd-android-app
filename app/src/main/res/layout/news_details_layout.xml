@@ -68,6 +68,8 @@
                 android:text="news"
                 android:textColor="#020202"
                 android:textSize="15sp"
+                android:autoLink="web|phone"
+                android:linksClickable="true"
                 />
         </LinearLayout>
     </ScrollView>
