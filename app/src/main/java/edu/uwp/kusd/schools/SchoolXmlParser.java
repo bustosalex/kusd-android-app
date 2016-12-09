@@ -42,7 +42,7 @@ public class SchoolXmlParser {
      */
 
 
-
+//lists to hold each school separated by type
     List<School> Eschools = new ArrayList<>();
     List<School> Mschools = new ArrayList<>();
     List<School> Hschools = new ArrayList<>();
@@ -61,15 +61,14 @@ public class SchoolXmlParser {
     }
 
     /**
-     * Schools are contained in nodes in the XML. Parses the individual nodes for events.
+     * Schools are contained in nodes in the XML. Parses the individual nodes for edu.uwp.kusd.schools.
      *
-     * @return a list of parsed events
+     * @return a list of parsed edu.uwp.kusd.schools
      * @throws XmlPullParserException
      * @throws IOException
      * @throws ParseException
      */
     public List<School> parseNodes(Integer i) throws XmlPullParserException, IOException, ParseException {
-        List<School> schools = new ArrayList<>();
 
 
         //Parse each event node
@@ -78,7 +77,7 @@ public class SchoolXmlParser {
                 continue;
             }
 
-            //Add parse data of schools and add parsed schools matching only Elementary Schools to the list to be returned
+            //Add parse data of edu.uwp.kusd.schools and add parsed edu.uwp.kusd.schools matching only the selected type to the list to be returned
             String name = parser.getName();
             School tempSchool = parseSchool();
 
@@ -96,6 +95,7 @@ public class SchoolXmlParser {
             }
 
         }
+        //index passed in to get the right school type
         if (i == 0) {
             return Eschools;
         }
@@ -133,7 +133,7 @@ public class SchoolXmlParser {
         String state = null;
 
 
-        //The methods are blanked and variables are blanked no difference
+        //check for data type, the ones that are not displayed are ignored
         while (parser.next() != XmlPullParser.END_TAG) {
             if (parser.getEventType() != XmlPullParser.START_TAG) {
                 continue;
@@ -158,7 +158,7 @@ public class SchoolXmlParser {
 
             } else if (name.equals("hours")) {
                 skip(parser);
-                //hours aren't available for all schools, so they are left out
+                //hours aren't available for all edu.uwp.kusd.schools, so they are left out
 
             } else if (name.equals("phone")) {
                 phone = readPhone();

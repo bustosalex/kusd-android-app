@@ -4,17 +4,12 @@ package edu.uwp.kusd.schools;
  * Created by Liz on 10/17/2016.
  */
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.text.ParseException;
 import java.util.List;
 
@@ -22,6 +17,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -39,16 +35,16 @@ import edu.uwp.kusd.network.VolleySingleton;
  * Created by Liz on 10/17/2016.
  */
 
-// In each fragment all requested schools are displayed with the parsed information
+// In each fragment all requested edu.uwp.kusd.schools are displayed with the parsed information
 public class HighFragment extends Fragment {
-    //A list of all schools parsed from the XML.
+    //A list of all edu.uwp.kusd.schools parsed from the XML.
     public List<School> tSchools;
 
 
     private static final String SCHOOL_LIST_URL = "http://www.kusd.edu/xml-schools";
 
     /**
-     * A list of all schools parsed from the XML.
+     * A list of all edu.uwp.kusd.schools parsed from the XML.
      */
     private RecyclerView rv;
 
@@ -73,6 +69,7 @@ public class HighFragment extends Fragment {
                 new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+
         //Request XML from KUSD
         RequestQueue requestQueue = VolleySingleton.getsInstance().getRequestQueue();
         StringRequest stringRequest = new StringRequest(Request.Method.GET, SCHOOL_LIST_URL, new Response.Listener<String>() {
@@ -87,7 +84,7 @@ public class HighFragment extends Fragment {
 
 
                 try {
-                    //Parse the schools into a list
+                    //Parse the edu.uwp.kusd.schools into a list
                     tSchools = schoolXmlParser.parseNodes(2);
 
                     adapter = new SRVAdapter(tSchools, getActivity());
@@ -105,6 +102,7 @@ public class HighFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
+                displayError(rootView);
             }
         });
         requestQueue.add(stringRequest);
@@ -113,22 +111,13 @@ public class HighFragment extends Fragment {
         return rootView;
 
     }
-    //converts image URL into bitmap image
-    public Bitmap getBitmapFromURL(String src) {
-        Bitmap myBitmap = null;
 
-        try {
-            URL url = new URL(src);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            myBitmap = BitmapFactory.decodeStream(input);
 
-        } catch (IOException e) {
-            // Log exception
-        }
-        return myBitmap;
+    //for when there's no data connection or other error
+    private void displayError(View v) {
+        rv = (RecyclerView) v.findViewById(R.id.rvH);
+        rv.setVisibility(View.GONE);
+        TextView noEvents = (TextView) v.findViewById(R.id.no_schools);
+        noEvents.setVisibility(View.VISIBLE);
     }
-
 }

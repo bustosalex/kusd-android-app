@@ -87,6 +87,7 @@ public class HomeActivity extends AppCompatActivity {
         actionBar.setDisplayShowTitleEnabled(false);
 
         //Make a request for the highlight xml
+
         StringRequest stringRequest = new StringRequest(Request.Method.GET, HIGHLIGHTS_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -146,6 +147,7 @@ public class HomeActivity extends AppCompatActivity {
         AppSection boardMembers = new AppSection(R.drawable.bank_blue, BoardMembersActivity.class, "Board Members");
         appSections.add(boardMembers);
         AppSection infiniteCampus = new AppSection(R.drawable.infinity_blue_square, InfiniteCampusActivity.class, "Infinite Campus");
+
         appSections.add(infiniteCampus);
 
         recyclerView = (RecyclerView) findViewById(R.id.home_activty_icon_grid);

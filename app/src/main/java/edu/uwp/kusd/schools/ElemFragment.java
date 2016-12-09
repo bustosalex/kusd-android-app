@@ -17,6 +17,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
 import com.android.volley.Request;
@@ -35,11 +36,11 @@ import edu.uwp.kusd.network.VolleySingleton;
  * Created by Liz on 10/5/2016.
  */
 
-// In each fragment all requested schools are displayed with the parsed information
+// In each fragment all requested edu.uwp.kusd.schools are displayed with the parsed information
 public class ElemFragment extends Fragment {
 
 
-    //A list of all schools parsed from the XML.
+    //A list of all edu.uwp.kusd.schools parsed from the XML.
     public List<School> tSchools;
 
 
@@ -84,7 +85,7 @@ public class ElemFragment extends Fragment {
 
 
                 try {
-                    //Parse the schools into a list
+                    //Parse the edu.uwp.kusd.schools into a list
                     tSchools = schoolXmlParser.parseNodes(0);
 
                     adapter = new SRVAdapter(tSchools, getActivity());
@@ -101,6 +102,7 @@ public class ElemFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
+                displayError(rootView);
             }
         });
         requestQueue.add(stringRequest);
@@ -110,6 +112,12 @@ public class ElemFragment extends Fragment {
 
     }
 
-
+    //for when there's no data connection or other error
+    private void displayError(View v) {
+        rv = (RecyclerView) v.findViewById(R.id.rvE);
+        rv.setVisibility(View.GONE);
+        TextView noEvents = (TextView) v.findViewById(R.id.no_schools);
+        noEvents.setVisibility(View.VISIBLE);
+    }
 }
 

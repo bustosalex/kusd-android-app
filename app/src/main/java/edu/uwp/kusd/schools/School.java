@@ -1,8 +1,8 @@
 package edu.uwp.kusd.schools;
 
-import java.util.ArrayList;
-import java.util.List;
 
+
+//a school object to be displayed in a cardview
 class School {
     String schoolName;
     String image;

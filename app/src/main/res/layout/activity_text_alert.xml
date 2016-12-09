@@ -71,6 +71,7 @@
         android:layout_below="@id/phoneText"
         android:layout_alignParentStart="true" />
 
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -81,5 +82,4 @@
         android:gravity="center" />
 
     </RelativeLayout>
-
 </RelativeLayout>

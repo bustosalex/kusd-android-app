@@ -39,7 +39,7 @@ public class Event extends RealmObject implements Serializable {
     private String mDay;
 
     /**
-     * The school or or schools involved in the event.
+     * The school or or edu.uwp.kusd.schools involved in the event.
      */
     private String mSchool;
 
@@ -58,7 +58,7 @@ public class Event extends RealmObject implements Serializable {
      * Constructs a new event.
      *
      * @param eventTitle the title of an event
-     * @param school     the school or schools involed in an event
+     * @param school     the school or edu.uwp.kusd.schools involed in an event
      * @param details    the details of an event
      */
     public Event(String id, String eventTitle, String school, String details, String year, String month, String day) {

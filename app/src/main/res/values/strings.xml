@@ -16,6 +16,7 @@
     <string name="no_events">No events are available. Check back later.</string>
     <string name="no_pdfs">No PDFs are available. Check back later</string>
     <string name="no_board">No board members are available. Check back later</string>
+    <string name="no_schools">Schools are not available. Check for data connection</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

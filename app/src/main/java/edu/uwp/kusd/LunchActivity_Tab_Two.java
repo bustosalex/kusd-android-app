@@ -102,5 +102,3 @@ public class LunchActivity_Tab_Two extends Fragment {
 
 
 }
-
-

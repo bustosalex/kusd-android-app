@@ -10,5 +10,4 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="edu.uwp.kusd.News.NewsDetails">
 
-
 </RelativeLayout>

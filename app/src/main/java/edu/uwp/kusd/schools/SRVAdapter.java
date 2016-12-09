@@ -3,8 +3,6 @@ package edu.uwp.kusd.schools;
 import android.content.Context;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 
 import android.net.Uri;
 import android.support.v7.widget.CardView;
@@ -18,15 +16,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.List;
 
 import com.bumptech.glide.Glide;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-
-import java.net.URL;
-import java.util.List;
+import edu.uwp.kusd.R;
 
 import edu.uwp.kusd.R;
 
@@ -100,20 +94,14 @@ public class SRVAdapter extends RecyclerView.Adapter<SRVAdapter.SchoolViewHolder
 
         });
 
+        //converts the image URL to a bitmap to correctly display
+        Glide.with(context).load(schools.get(i).image).into(schoolViewHolder.image);
         schoolViewHolder.name.setText(schools.get(i).schoolName);
         schoolViewHolder.address.setText(schools.get(i).address);
         schoolViewHolder.city.setText(schools.get(i).city);
         schoolViewHolder.zip.setText(schools.get(i).zip);
         schoolViewHolder.phone.setText(schools.get(i).phone);
         schoolViewHolder.principal.setText(schools.get(i).principal);
-
-
-        //converts each image
-        //URL into a bitmap image and sets the image
-        //Bitmap b = getBitmapFromURL(schools.get(i).image);
-        //schoolViewHolder.image.setImageBitmap(b);
-
-        Glide.with(context).load(schools.get(i).image).centerCrop().into(schoolViewHolder.image);
 
 
     }
@@ -130,24 +118,6 @@ public class SRVAdapter extends RecyclerView.Adapter<SRVAdapter.SchoolViewHolder
     @Override
     public int getItemCount() {
         return schools.size();
-    }
-
-    //bitmap conversion method
-    public Bitmap getBitmapFromURL(String src) {
-        Bitmap myBitmap = null;
-
-        try {
-            URL url = new URL(src);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            myBitmap = BitmapFactory.decodeStream(input);
-
-        } catch (IOException e) {
-            // Log exception
-        }
-        return myBitmap;
     }
 
 
