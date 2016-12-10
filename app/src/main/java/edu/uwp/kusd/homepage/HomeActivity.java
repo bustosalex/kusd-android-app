@@ -103,7 +103,7 @@ public class HomeActivity extends AppCompatActivity {
         appSections.add(news);
         AppSection calendar = new AppSection(R.drawable.ic_calendar_black_36dp, CalendarActivity.class, "Calendars");
         appSections.add(calendar);
-        AppSection lunch = new AppSection(R.drawable.ic_food_apple_black_36dp, LunchActivity.class, "Lunch Menus");
+        AppSection lunch = new AppSection(R.drawable.ic_food_apple_black_36dp, LunchActivity.class, "Menus");
         appSections.add(lunch);
         AppSection schools = new AppSection(R.drawable.ic_school_black_36dp, SchoolsActivity.class, "School List");
         appSections.add(schools);
