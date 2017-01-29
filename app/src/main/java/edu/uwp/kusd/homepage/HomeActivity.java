@@ -42,6 +42,7 @@ import edu.uwp.kusd.boardMembers.BoardMembersActivity;
 import edu.uwp.kusd.calendar.CalendarActivity;
 import edu.uwp.kusd.network.VolleySingleton;
 import edu.uwp.kusd.xmlParser.HighlightsXmlParser;
+import edu.uwp.kusd.tabularSocialMedia.TabularSocialMediaActivity;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -134,11 +135,11 @@ public class HomeActivity extends AppCompatActivity {
         appSections.add(news);
         AppSection calendar = new AppSection(R.drawable.calendar_blue, CalendarActivity.class, "Calendars");
         appSections.add(calendar);
-        AppSection lunch = new AppSection(R.drawable.food_blue, LunchActivity.class, "Lunch Menus");
+        AppSection lunch = new AppSection(R.drawable.food_blue, LunchActivity.class, "Menus");
         appSections.add(lunch);
         AppSection schools = new AppSection(R.drawable.school_blue, SchoolsActivity.class, "School List");
         appSections.add(schools);
-        AppSection socialMedia = new AppSection(R.drawable.social_media_blue, SocialMediaActivity.class, "Social Media");
+        AppSection socialMedia = new AppSection(R.drawable.social_media_blue, TabularSocialMediaActivity.class, "Social Media");
         appSections.add(socialMedia);
         AppSection features = new AppSection(R.drawable.star_blue, FeaturesActivity.class, "Features");
         appSections.add(features);

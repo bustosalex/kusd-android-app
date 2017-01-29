@@ -37,6 +37,7 @@ public class SchoolsActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("Middle"));
         tabLayout.addTab(tabLayout.newTab().setText("High"));
         tabLayout.addTab(tabLayout.newTab().setText("Charter"));
+        tabLayout.addTab(tabLayout.newTab().setText("E.S.C."));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);

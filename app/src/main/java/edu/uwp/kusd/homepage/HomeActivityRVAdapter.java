@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +54,8 @@ public class HomeActivityRVAdapter extends RecyclerView.Adapter<HomeActivityRVAd
          */
         private TextView mSectionName;
 
+        private RelativeLayout mClickableIcon;
+
         /**
          * Binds an app section to a view
          *
@@ -62,6 +65,7 @@ public class HomeActivityRVAdapter extends RecyclerView.Adapter<HomeActivityRVAd
             super(itemView);
             mIcon = (ImageButton) itemView.findViewById(R.id.app_section_icon_image);
             mSectionName = (TextView) itemView.findViewById(R.id.app_section_name);
+            mClickableIcon = (RelativeLayout) itemView.findViewById(R.id.clickable_section);
         }
     }
 
@@ -86,10 +90,36 @@ public class HomeActivityRVAdapter extends RecyclerView.Adapter<HomeActivityRVAd
      */
     @Override
     public void onBindViewHolder(final HomeActivityViewHolder holder, final int position) {
-        holder.mIcon.setBackground(context.getDrawable(mAppSectionList.get(position).getIcon()));
+        holder.mIcon.setBackground(ContextCompat.getDrawable(context, mAppSectionList.get(position).getIcon()));
+        //Doesn't work in API 19
+        //holder.mIcon.setBackground(context.getDrawable(mAppSectionList.get(position).getIcon()));
         holder.mSectionName.setText(mAppSectionList.get(position).getSectionName());
 
         //Sets up the infinite campus section and the rest of the other section buttons' click listeners
+        holder.mClickableIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mAppSectionList.get(holder.getAdapterPosition()).getSectionName().equals("Infinite Campus")) {
+                    boolean installed = isAppInstalled("com.infinitecampus.mobilePortal");
+                    if (installed) {
+                        Intent intent = context.getPackageManager().getLaunchIntentForPackage("com.infinitecampus.mobilePortal");
+                        context.startActivity(intent);
+                    } else {
+                        try {
+                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.infinitecampus.mobilePortal" ));
+                            context.startActivity(intent);
+                        } catch (ActivityNotFoundException e) {
+                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.infinitecampus.mobilePortal&hl=en"));
+                            context.startActivity(intent);
+                        }
+                    }
+                } else {
+                    Intent i = new Intent(context, mAppSectionList.get(holder.getAdapterPosition()).getActivityName());
+                    context.startActivity(i);
+                }
+            }
+        });
+
         holder.mIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

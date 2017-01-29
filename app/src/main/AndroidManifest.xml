@@ -66,6 +66,10 @@
             android:parentActivityName=".homepage.HomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"/>
+        <activity android:name=".tabularSocialMedia.TabularSocialMediaActivity"
+                  android:parentActivityName=".homepage.HomeActivity"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppThemeNoActionBar"/>
         <activity android:name=".features.FeaturesActivity"
             android:theme="@style/AppThemeNoActionBar"
             android:parentActivityName=".homepage.HomeActivity"

@@ -125,7 +125,7 @@ public class NewsXmlParser {
      */
     private String readDate() throws IOException, XmlPullParserException {
         parser.require(XmlPullParser.START_TAG, null, "date");
-        String date = readText();
+        String date = readText().replaceAll("(\\s-\\s[0-9]{1,2}:[0-9][0-9][a|p]m)", "");
         parser.require(XmlPullParser.END_TAG, null, "date");
         return date;
     }

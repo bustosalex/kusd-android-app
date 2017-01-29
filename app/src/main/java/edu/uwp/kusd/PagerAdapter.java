@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import edu.uwp.kusd.schools.CharterFragment;
+import edu.uwp.kusd.schools.ESCFragment;
 import edu.uwp.kusd.schools.ElemFragment;
 import edu.uwp.kusd.schools.HighFragment;
 import edu.uwp.kusd.schools.MiddleFragment;
@@ -33,6 +34,9 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
             case 3:
                 CharterFragment tab4 = new CharterFragment();
                 return tab4;
+            case 4:
+                ESCFragment tab5 = new ESCFragment();
+                return tab5;
             default:
                 return null;
         }

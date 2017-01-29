@@ -47,6 +47,7 @@ public class SchoolXmlParser {
     List<School> Mschools = new ArrayList<>();
     List<School> Hschools = new ArrayList<>();
     List<School> Cschools = new ArrayList<>();
+    List<School> ESCSchool = new ArrayList<>();
 
 
     public SchoolXmlParser(String xmlData) {
@@ -92,6 +93,8 @@ public class SchoolXmlParser {
             }
             else if  (tempSchool.schoolType.contains("Charter Schools")) {
                 Cschools.add(tempSchool);
+            } else if (tempSchool.schoolType.contains("District Office")) {
+                ESCSchool.add(tempSchool);
             }
 
         }
@@ -104,10 +107,14 @@ public class SchoolXmlParser {
         }
         else if (i == 2) {
             return Hschools;
+        } else if (i == 3) {
+            return ESCSchool;
         }
-        else
+        else if (i == 4) {
             return Cschools;
+        }
 
+        return new ArrayList<>();
     }
 
 

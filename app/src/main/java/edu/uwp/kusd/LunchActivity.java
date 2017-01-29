@@ -31,7 +31,7 @@ public class LunchActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Lunch Menus");
+        actionBar.setTitle("Menus");
 
          actionBar.setDisplayHomeAsUpEnabled(true);
 
@@ -46,9 +46,9 @@ public class LunchActivity extends AppCompatActivity {
     //Sets the name of the Fragment and which tab it will be working off of.
     private void setupViewPager(ViewPager viewPager) {
         LunchActivity_ViewPageAdapter adapter = new  LunchActivity_ViewPageAdapter(getSupportFragmentManager());
-        adapter.addFragment(new LunchActivity_Tab_One(), "Elementary School");
-        adapter.addFragment(new LunchActivity_Tab_Two(), "Middle School");
-        adapter.addFragment(new LunchActivity_Tab_Three(), "High School");
+        adapter.addFragment(new LunchActivity_Tab_One(), "Elementary");
+        adapter.addFragment(new LunchActivity_Tab_Two(), "Middle");
+        adapter.addFragment(new LunchActivity_Tab_Three(), "High");
 
 
         viewPager.setAdapter(adapter);

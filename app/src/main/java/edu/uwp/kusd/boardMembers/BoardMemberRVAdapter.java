@@ -1,6 +1,8 @@
 package edu.uwp.kusd.boardMembers;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,12 +65,19 @@ public class BoardMemberRVAdapter extends RecyclerView.Adapter<BoardMemberRVAdap
      * @param position the position to bind at
      */
     @Override
-    public void onBindViewHolder(BoardMemberRVAdapter.BoardMemberViewHolder holder, int position) {
+    public void onBindViewHolder(final BoardMemberRVAdapter.BoardMemberViewHolder holder, int position) {
         Glide.with(mContext).load(mBoardMembers.get(position).getPhotoURL()).centerCrop().into(holder.mPhotoImageView);
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM y", Locale.US);
         holder.mNameTextView.setText(mBoardMembers.get(position).getName());
         holder.mPositionTextView.setText(mBoardMembers.get(position).getPosition());
         holder.mEmailTextView.setText(mBoardMembers.get(position).getEmail());
+        holder.mEmailTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + holder.mEmailTextView.getText()));
+                mContext.startActivity(Intent.createChooser(i, "Send Email"));
+            }
+        });
         holder.mPhoneTextView.setText(mBoardMembers.get(position).getPhone());
         String temp = mContext.getResources().getString(R.string.term_expires) + " " + dateFormat.format(mBoardMembers.get(position).getTerm());
         holder.mTermTextView.setText(temp);
