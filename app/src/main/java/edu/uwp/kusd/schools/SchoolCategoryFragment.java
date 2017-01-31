@@ -31,17 +31,33 @@ import edu.uwp.kusd.network.VolleySingleton;
  * Created by Dakota on 1/26/2017.
  */
 
-public class ESCFragment extends Fragment {
-
-    //public List<School> mSchools;
+public class SchoolCategoryFragment extends Fragment {
 
     private static final String SCHOOL_LIST_URL = "http://www.kusd.edu/xml-schools";
 
+    private static final String SCHOOL_TYPE = "schoolType";
+
     private RecyclerView rv;
+
+    private int mSchoolType;
 
     public SRVAdapter mSRVAdapter;
 
     public Context mContext;
+
+    public static SchoolCategoryFragment newInstance(int schoolType) {
+        Bundle args = new Bundle();
+        args.putInt(SCHOOL_TYPE, schoolType);
+        SchoolCategoryFragment fragment = new SchoolCategoryFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mSchoolType = getArguments().getInt(SCHOOL_TYPE);
+    }
 
     @Nullable
     @Override
@@ -63,7 +79,7 @@ public class ESCFragment extends Fragment {
 
                 try {
                     //Parse the edu.uwp.kusd.schools into a list
-                    List<School> mSchools = schoolXmlParser.parseNodes(3);
+                    List<School> mSchools = schoolXmlParser.parseNodes(mSchoolType);
 
                     mSRVAdapter = new SRVAdapter(mSchools, getActivity());
                     rv.setAdapter(mSRVAdapter);

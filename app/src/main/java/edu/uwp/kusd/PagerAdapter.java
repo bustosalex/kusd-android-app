@@ -5,10 +5,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import edu.uwp.kusd.schools.CharterFragment;
-import edu.uwp.kusd.schools.ESCFragment;
+import edu.uwp.kusd.schools.DistrictFragment;
 import edu.uwp.kusd.schools.ElemFragment;
 import edu.uwp.kusd.schools.HighFragment;
 import edu.uwp.kusd.schools.MiddleFragment;
+import edu.uwp.kusd.schools.SchoolCategoryFragment;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
     int mNumOfTabs;
@@ -35,8 +36,14 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
                 CharterFragment tab4 = new CharterFragment();
                 return tab4;
             case 4:
-                ESCFragment tab5 = new ESCFragment();
+                DistrictFragment tab5 = new DistrictFragment();
                 return tab5;
+            case 5:
+                SchoolCategoryFragment choiceSchools = SchoolCategoryFragment.newInstance(5);
+                return choiceSchools;
+            case 6:
+                SchoolCategoryFragment specialtySchools = SchoolCategoryFragment.newInstance(6);
+                return specialtySchools;
             default:
                 return null;
         }

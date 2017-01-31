@@ -47,7 +47,9 @@ public class SchoolXmlParser {
     List<School> Mschools = new ArrayList<>();
     List<School> Hschools = new ArrayList<>();
     List<School> Cschools = new ArrayList<>();
-    List<School> ESCSchool = new ArrayList<>();
+    List<School> districtSchools = new ArrayList<>();
+    List<School> choiceSchools = new ArrayList<>();
+    List<School> specialtySchools = new ArrayList<>();
 
 
     public SchoolXmlParser(String xmlData) {
@@ -94,24 +96,29 @@ public class SchoolXmlParser {
             else if  (tempSchool.schoolType.contains("Charter Schools")) {
                 Cschools.add(tempSchool);
             } else if (tempSchool.schoolType.contains("District Office")) {
-                ESCSchool.add(tempSchool);
+                districtSchools.add(tempSchool);
+            } else if (tempSchool.schoolType.contains("Choice Schools")) {
+                choiceSchools.add(tempSchool);
+            } else if (tempSchool.schoolType.contains("Specialty School")) {
+                specialtySchools.add(tempSchool);
             }
 
         }
         //index passed in to get the right school type
         if (i == 0) {
             return Eschools;
-        }
-        else if (i == 1) {
+        } else if (i == 1) {
             return Mschools;
-        }
-        else if (i == 2) {
+        } else if (i == 2) {
             return Hschools;
         } else if (i == 3) {
-            return ESCSchool;
-        }
-        else if (i == 4) {
+            return districtSchools;
+        } else if (i == 4) {
             return Cschools;
+        } else if (i == 5) {
+            return choiceSchools;
+        } else if (i == 6) {
+            return specialtySchools;
         }
 
         return new ArrayList<>();

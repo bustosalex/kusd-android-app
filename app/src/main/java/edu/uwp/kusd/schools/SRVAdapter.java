@@ -44,8 +44,8 @@ public class SRVAdapter extends RecyclerView.Adapter<SRVAdapter.SchoolViewHolder
         CardView cv;
         TextView name;
         TextView address;
-        TextView city;
-        TextView zip;
+        //TextView city;
+        //TextView zip;
         TextView phone;
         TextView principal;
         ImageView image;
@@ -57,8 +57,8 @@ public class SRVAdapter extends RecyclerView.Adapter<SRVAdapter.SchoolViewHolder
             name = (TextView) itemView.findViewById(R.id.name);
             image = (ImageView) itemView.findViewById(R.id.image);
             address = (TextView) itemView.findViewById(R.id.address);
-            city = (TextView) itemView.findViewById(R.id.city);
-            zip = (TextView) itemView.findViewById(R.id.zip);
+            //city = (TextView) itemView.findViewById(R.id.city);
+            //zip = (TextView) itemView.findViewById(R.id.zip);
             phone = (TextView) itemView.findViewById(R.id.phone);
             principal = (TextView) itemView.findViewById(R.id.principal);
 
@@ -97,9 +97,9 @@ public class SRVAdapter extends RecyclerView.Adapter<SRVAdapter.SchoolViewHolder
         //converts the image URL to a bitmap to correctly display
         Glide.with(context).load(schools.get(i).image).into(schoolViewHolder.image);
         schoolViewHolder.name.setText(schools.get(i).schoolName);
-        schoolViewHolder.address.setText(schools.get(i).address);
-        schoolViewHolder.city.setText(schools.get(i).city);
-        schoolViewHolder.zip.setText(schools.get(i).zip);
+        schoolViewHolder.address.setText(schools.get(i).address + "\n" + schools.get(i).city + "\n" + schools.get(i).zip);
+        //schoolViewHolder.city.setText(schools.get(i).city);
+        //schoolViewHolder.zip.setText(schools.get(i).zip);
         schoolViewHolder.phone.setText(schools.get(i).phone);
         schoolViewHolder.principal.setText(schools.get(i).principal);
 
