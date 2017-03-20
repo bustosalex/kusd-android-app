@@ -70,7 +70,7 @@
                   android:parentActivityName=".homepage.HomeActivity"
                   android:screenOrientation="portrait"
                   android:theme="@style/AppThemeNoActionBar"/>
-        <activity android:name=".features.FeaturesActivity"
+        <activity android:name=".features.ScrollingFeaturesActivity"
             android:theme="@style/AppThemeNoActionBar"
             android:parentActivityName=".homepage.HomeActivity"
             android:screenOrientation="portrait"/>

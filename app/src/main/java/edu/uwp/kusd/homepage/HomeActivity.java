@@ -35,6 +35,7 @@ import edu.uwp.kusd.InfiniteCampusActivity;
 import edu.uwp.kusd.LunchActivity;
 import edu.uwp.kusd.News.NewsActivity;
 import edu.uwp.kusd.R;
+import edu.uwp.kusd.features.ScrollingFeaturesActivity;
 import edu.uwp.kusd.schools.SchoolsActivity;
 import edu.uwp.kusd.SocialMediaActivity;
 import edu.uwp.kusd.textAlerts.TextAlertActivity;
@@ -141,7 +142,7 @@ public class HomeActivity extends AppCompatActivity {
         appSections.add(schools);
         AppSection socialMedia = new AppSection(R.drawable.social_media_blue, TabularSocialMediaActivity.class, "Social Media");
         appSections.add(socialMedia);
-        AppSection features = new AppSection(R.drawable.star_blue, FeaturesActivity.class, "Features");
+        AppSection features = new AppSection(R.drawable.star_blue, ScrollingFeaturesActivity.class, "Features");
         appSections.add(features);
         AppSection textAlert = new AppSection(R.drawable.message_reply_text_blue, TextAlertActivity.class, "Text Alerts");
         appSections.add(textAlert);
