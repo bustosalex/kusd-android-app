@@ -1,5 +1,7 @@
 package edu.uwp.kusd.News;
 
+import android.text.Html;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -91,11 +93,11 @@ public class NewsXmlParser {
             }
             String name = parser.getName();
             if (name.equals("title")) {
-                title = readTitle().replaceAll("&#039;", "'").replaceAll("&#038;", "");
+                title = Html.fromHtml(readTitle()).toString();
             } else if (name.equals("date")) {
                 date = readDate();
             } else if (name.equals("story")) {
-                desc = readStory().replaceAll("</p>", "\n").replaceAll("<[^>]+>","").replaceAll("&#039;", "'").replaceAll("&#038;", "");
+                desc = Html.fromHtml(readStory()).toString();
             }
         }
         return new NewsItems(title, date, desc);
