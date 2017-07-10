@@ -7,28 +7,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGEEAD"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-    <compatible-screens>
-        <screen android:screenSize="normal" android:screenDensity="hdpi" />
-        <screen android:screenSize="normal" android:screenDensity="xhdpi" />
-
-        <screen android:screenSize="large" android:screenDensity="ldpi" />
-        <screen android:screenSize="large" android:screenDensity="mdpi" />
-        <screen android:screenSize="large" android:screenDensity="hdpi" />
-        <screen android:screenSize="large" android:screenDensity="xhdpi" />
-
-        <screen android:screenSize="xlarge" android:screenDensity="ldpi" />
-        <screen android:screenSize="xlarge" android:screenDensity="mdpi" />
-        <screen android:screenSize="xlarge" android:screenDensity="hdpi" />
-        <screen android:screenSize="xlarge" android:screenDensity="xhdpi" />
-    </compatible-screens>
-
-    <supports-screens
-        android:normalScreens="true"
-        android:largeScreens="true"
-        android:xlargeScreens="true"
-        android:smallScreens="false"
-        android:requiresSmallestWidthDp="280"/>
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/kusd_launch"
