@@ -28,6 +28,20 @@ public class TextAlertActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Text Alerts");
 
+        final AlertDialog.Builder signupAlert = new AlertDialog.Builder(this);
+        signupAlert.setMessage(R.string.signupAlert)
+                .setCancelable(true)
+                .setTitle("Text Alerts")
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .create()
+                .show();
+
+
         Button submit = (Button) findViewById(R.id.submitButton);
         submit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {

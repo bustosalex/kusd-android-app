@@ -22,6 +22,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -30,14 +34,12 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.uwp.kusd.features.FeaturesActivity;
+import edu.uwp.kusd.RSchoolTodayActivity;
 import edu.uwp.kusd.InfiniteCampusActivity;
 import edu.uwp.kusd.LunchActivity;
 import edu.uwp.kusd.News.NewsActivity;
 import edu.uwp.kusd.R;
-import edu.uwp.kusd.features.ScrollingFeaturesActivity;
 import edu.uwp.kusd.schools.SchoolsActivity;
-import edu.uwp.kusd.SocialMediaActivity;
 import edu.uwp.kusd.textAlerts.TextAlertActivity;
 import edu.uwp.kusd.boardMembers.BoardMembersActivity;
 import edu.uwp.kusd.calendar.CalendarActivity;
@@ -84,6 +86,15 @@ public class HomeActivity extends AppCompatActivity {
 
         //Setup the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setDataAndType(Uri.parse("http://kusd.edu"), "text/html");
+                startActivity(intent);
+                Toast.makeText(HomeActivity.this, "Press back to return to KUSD", Toast.LENGTH_LONG).show();
+            }
+        });
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
@@ -107,7 +118,7 @@ public class HomeActivity extends AppCompatActivity {
                     mViewFlipper.setAutoStart(true);
                     mViewFlipper.setInAnimation(slideIn);
                     mViewFlipper.setOutAnimation(slideOut);
-                    mViewFlipper.setFlipInterval(4500);
+                    mViewFlipper.setFlipInterval(7000);
                     mViewFlipper.startFlipping();
 
 
@@ -142,7 +153,7 @@ public class HomeActivity extends AppCompatActivity {
         appSections.add(schools);
         AppSection socialMedia = new AppSection(R.drawable.social_media_blue, TabularSocialMediaActivity.class, "Social Media");
         appSections.add(socialMedia);
-        AppSection features = new AppSection(R.drawable.star_blue, ScrollingFeaturesActivity.class, "Features");
+        AppSection features = new AppSection(R.drawable.rst_icon, RSchoolTodayActivity.class, "Athletic Schedules");
         appSections.add(features);
         AppSection textAlert = new AppSection(R.drawable.message_reply_text_blue, TextAlertActivity.class, "Text Alerts");
         appSections.add(textAlert);
@@ -166,21 +177,59 @@ public class HomeActivity extends AppCompatActivity {
      * @param highlight a highlight to set
      */
     private void setFlipperImages(final Highlight highlight) {
-        ImageView image = new ImageView(getApplicationContext());
-        Animation slideIn = AnimationUtils.loadAnimation(HomeActivity.this, R.anim.slide_in);
-        Glide.with(this).load(highlight.getImageURL()).centerCrop().animate(slideIn).into(image);
+        final ImageView image = new ImageView(getApplicationContext());
+        Glide.with(this).load(highlight.getImageURL()).diskCacheStrategy(DiskCacheStrategy.ALL).into(new SimpleTarget<GlideDrawable>() {
+            @Override
+            public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
+                image.setImageDrawable(resource);
+                image.setScaleType(ImageView.ScaleType.FIT_XY);
+
+            }
+        });
+
         mViewFlipper.addView(image);
-        if (highlight.getImageLink() != null) {
-            image.setOnClickListener(new View.OnClickListener() {
+            image.setOnTouchListener(new HighlightSwipeListener(this) {
                 @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setDataAndType(Uri.parse(highlight.getImageLink()), "text/html");
-                    startActivity(intent);
-                    Toast.makeText(HomeActivity.this, "Press back to return to KUSD", Toast.LENGTH_LONG).show();
+                public void swipeLeft() {
+                    super.swipeLeft();
+                    mViewFlipper.setInAnimation(AnimationUtils.loadAnimation(HomeActivity.this, R.anim.slide_in));
+                    mViewFlipper.setOutAnimation(AnimationUtils.loadAnimation(HomeActivity.this, R.anim.slide_out));
+                    mViewFlipper.showNext();
+                    mViewFlipper.stopFlipping();
+                    mViewFlipper.startFlipping();
+                }
+
+                @Override
+                public void swipeRight() {
+                    super.swipeRight();
+                    mViewFlipper.setInAnimation(AnimationUtils.loadAnimation(HomeActivity.this, R.anim.slide_in_left));
+                    mViewFlipper.setOutAnimation(AnimationUtils.loadAnimation(HomeActivity.this, R.anim.slide_out_left));
+                    mViewFlipper.showPrevious();
+                    mViewFlipper.stopFlipping();
+                    mViewFlipper.startFlipping();
+                    mViewFlipper.setInAnimation(AnimationUtils.loadAnimation(HomeActivity.this, R.anim.slide_in));
+                    mViewFlipper.setOutAnimation(AnimationUtils.loadAnimation(HomeActivity.this, R.anim.slide_out));
+                }
+
+                @Override
+                public void tapped() {
+                    if (highlight.getImageLink() != null) {
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setDataAndType(Uri.parse(highlight.getImageLink()), "text/html");
+                        startActivity(intent);
+                        Toast.makeText(HomeActivity.this, "Press back to return to KUSD", Toast.LENGTH_LONG).show();
+                    }
                 }
             });
-        }
+//            image.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = new Intent(Intent.ACTION_VIEW);
+//                    intent.setDataAndType(Uri.parse(highlight.getImageLink()), "text/html");
+//                    startActivity(intent);
+//                    Toast.makeText(HomeActivity.this, "Press back to return to KUSD", Toast.LENGTH_LONG).show();
+//                }
+//            });
     }
 
     /**

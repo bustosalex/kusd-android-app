@@ -1,71 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="edu.uwp.kusd">
+          package="edu.uwp.kusd">
+
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGEEAD"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
+        android:name=".network.VolleyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/kusd_launch"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name=".network.VolleyApplication">
-        <activity android:name=".homepage.HomeActivity"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".homepage.HomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar">
-
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".News.NewsActivity"
-            android:parentActivityName=".homepage.HomeActivity"
-            android:theme="@style/AppThemeNoActionBar"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".calendar.CalendarActivity"
-            android:parentActivityName=".homepage.HomeActivity"
-            android:theme="@style/AppThemeNoActionBar"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".LunchActivity"
-            android:parentActivityName=".homepage.HomeActivity"
-            android:theme="@style/AppThemeNoActionBar"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name="edu.uwp.kusd.schools.SchoolsActivity"
+        <activity
+            android:name=".News.NewsActivity"
             android:parentActivityName=".homepage.HomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"/>
-        <activity android:name=".SocialMediaActivity"
+        <activity
+            android:name=".calendar.CalendarActivity"
             android:parentActivityName=".homepage.HomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"/>
-        <activity android:name=".tabularSocialMedia.TabularSocialMediaActivity"
-                  android:parentActivityName=".homepage.HomeActivity"
-                  android:screenOrientation="portrait"
-                  android:theme="@style/AppThemeNoActionBar"/>
-        <activity android:name=".features.ScrollingFeaturesActivity"
-            android:theme="@style/AppThemeNoActionBar"
-            android:parentActivityName=".homepage.HomeActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".textAlerts.TextAlertActivity"
+        <activity
+            android:name=".LunchActivity"
             android:parentActivityName=".homepage.HomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"/>
-        <activity android:name=".News.NewsDetails"
+        <activity
+            android:name=".schools.SchoolsActivity"
+            android:parentActivityName=".homepage.HomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"/>
+        <activity
+            android:name=".SocialMediaActivity"
+            android:parentActivityName=".homepage.HomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"/>
+        <activity
+            android:name=".tabularSocialMedia.TabularSocialMediaActivity"
+            android:parentActivityName=".homepage.HomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"/>
+        <activity
+            android:name=".features.ScrollingFeaturesActivity"
+            android:parentActivityName=".homepage.HomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"/>
+        <activity
+            android:name=".textAlerts.TextAlertActivity"
+            android:parentActivityName=".homepage.HomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"/>
+        <activity
+            android:name=".News.NewsDetails"
             android:parentActivityName=".News.NewsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"/>
-        <activity android:name=".boardMembers.BoardMembersActivity"
-                  android:parentActivityName=".homepage.HomeActivity"
-                  android:screenOrientation="portrait"
-                  android:theme="@style/AppThemeNoActionBar"/>
+        <activity
+            android:name=".boardMembers.BoardMembersActivity"
+            android:parentActivityName=".homepage.HomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"/>
         <activity android:name=".InfiniteCampusActivity"/>
-
+        <activity android:name=".RSchoolTodayActivity">
+        </activity>
     </application>
 
 </manifest>

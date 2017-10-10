@@ -79,6 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_below="@+id/address"
+                android:autoLink="phone"
                 android:layout_toEndOf="@+id/image"
                 android:textStyle="bold" />
 

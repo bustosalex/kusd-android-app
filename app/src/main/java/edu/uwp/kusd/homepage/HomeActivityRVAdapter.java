@@ -113,6 +113,20 @@ public class HomeActivityRVAdapter extends RecyclerView.Adapter<HomeActivityRVAd
                             context.startActivity(intent);
                         }
                     }
+                } else if (mAppSectionList.get(holder.getAdapterPosition()).getSectionName().equals("Athletic Schedules")) {
+                    boolean installed = isAppInstalled("com.rschooltoday.activityscheduler");
+                    if (installed) {
+                        Intent intent = context.getPackageManager().getLaunchIntentForPackage("com.rschooltoday.activityscheduler");
+                        context.startActivity(intent);
+                    } else {
+                        try {
+                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.rschooltoday.activityscheduler" ));
+                            context.startActivity(intent);
+                        } catch (ActivityNotFoundException e) {
+                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.rschooltoday.activityscheduler&hl=en"));
+                            context.startActivity(intent);
+                        }
+                    }
                 } else {
                     Intent i = new Intent(context, mAppSectionList.get(holder.getAdapterPosition()).getActivityName());
                     context.startActivity(i);
@@ -134,6 +148,20 @@ public class HomeActivityRVAdapter extends RecyclerView.Adapter<HomeActivityRVAd
                             context.startActivity(intent);
                         } catch (ActivityNotFoundException e) {
                             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.infinitecampus.mobilePortal&hl=en"));
+                            context.startActivity(intent);
+                        }
+                    }
+                } else if (mAppSectionList.get(holder.getAdapterPosition()).getSectionName().equals("Athletic Schedules")) {
+                    boolean installed = isAppInstalled("com.rschooltoday.activityscheduler");
+                    if (installed) {
+                        Intent intent = context.getPackageManager().getLaunchIntentForPackage("com.rschooltoday.activityscheduler");
+                        context.startActivity(intent);
+                    } else {
+                        try {
+                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.rschooltoday.activityscheduler"));
+                            context.startActivity(intent);
+                        } catch (ActivityNotFoundException e) {
+                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.rschooltoday.activityscheduler&hl=en"));
                             context.startActivity(intent);
                         }
                     }

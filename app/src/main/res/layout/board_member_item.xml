@@ -95,6 +95,7 @@
                     <TextView
                         android:layout_toEndOf="@id/phone_icon"
                         android:id="@+id/board_phone"
+                        android:autoLink="phone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="12sp"
